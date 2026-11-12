@@ -1,0 +1,1484 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CIVL4334 Exam Sprint</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: same drafting-sheet system as the CIVL3520 sprint. Sticky tab bar, one reading column, cards and expandable lessons. */
+:root{
+  --bg:#EDF0F2; --surface:#FFFFFF; --ink:#13202A; --muted:#566571; --line:#CBD3DA; --soft:#E3E8EC;
+  --accent:#D9530F; --accent-ink:#FFFFFF; --crit:#C42B2B; --ok:#23803A; --warn:#A86A00; --tint:#FBEDE5; --oktint:#E3F2E6; --crittint:#F9E3E3;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E151B; --surface:#16202A; --ink:#E4EBF0; --muted:#97A6B2; --line:#2B3A46; --soft:#1D2A35;
+  --accent:#FF8A45; --accent-ink:#1A0D05; --crit:#FF6E6E; --ok:#5CCB76; --warn:#E3B04B; --tint:#2D1E15; --oktint:#15291B; --crittint:#2E1818; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E151B; --surface:#16202A; --ink:#E4EBF0; --muted:#97A6B2; --line:#2B3A46; --soft:#1D2A35;
+  --accent:#FF8A45; --accent-ink:#1A0D05; --crit:#FF6E6E; --ok:#5CCB76; --warn:#E3B04B; --tint:#2D1E15; --oktint:#15291B; --crittint:#2E1818; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--surface);border-bottom:1px solid var(--line);
+  background-image:linear-gradient(var(--soft) 1px,transparent 1px),linear-gradient(90deg,var(--soft) 1px,transparent 1px);background-size:22px 22px}
+header.top .wrap{padding-block:28px 22px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(34px,7vw,52px);font-weight:700;letter-spacing:.01em}
+h2{font-size:30px;font-weight:700;margin-top:8px}
+h3{font-size:22px;font-weight:600;margin-top:4px}
+p{margin:0}
+.lede{max-width:62ch;color:var(--muted);margin-top:10px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:0;scrollbar-width:none}
+nav.tabs button{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.02em;background:none;border:0;color:var(--muted);
+  padding:12px 12px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main .wrap{padding-block:28px 64px;display:flex;flex-direction:column;gap:28px}
+section.view{display:flex;flex-direction:column;gap:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.marks{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.marks td,.marks th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.marks th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.marks td.n{text-align:right;font-family:var(--mono);font-weight:600}
+.bar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden;min-width:60px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.scroll{overflow-x:auto;max-width:100%}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);vertical-align:middle}
+.pill.hot{background:var(--tint);color:var(--accent)}
+.pill.crit{background:var(--crittint);color:var(--crit)}
+.pill.ok{background:var(--oktint);color:var(--ok)}
+.day{display:flex;flex-direction:column;gap:10px}
+.day h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.day h3 small{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400}
+.task{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.task input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+.task .t{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+.task b{display:block}
+.task .d{color:var(--muted);font-size:15px}
+.task.done b{text-decoration:line-through;color:var(--muted)}
+.progress{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px}
+.progress .bar{flex:1;height:10px}
+.note{border-left:3px solid var(--accent);background:var(--tint);padding:12px 14px;border-radius:0 6px 6px 0}
+.note.crit{border-color:var(--crit);background:var(--crittint)}
+.note.ok{border-color:var(--ok);background:var(--oktint)}
+.f{font-family:var(--mono);font-size:14.5px;background:var(--soft);padding:10px 12px;border-radius:4px;overflow-x:auto;white-space:pre;line-height:1.7}
+code{font-family:var(--mono);font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:3px}
+ul,ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+details.mod{background:var(--surface);border:1px solid var(--line);border-radius:6px}
+details.mod>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between}
+details.mod>summary::-webkit-details-marker{display:none}
+details.mod>summary .ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+details.mod>summary .ttl span{color:var(--muted);font-size:14px}
+details.mod>summary::after{content:"+";font-family:var(--mono);font-size:22px;color:var(--accent)}
+details.mod[open]>summary::after{content:"−"}
+details.mod .body{padding:0 20px 22px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:18px;min-width:0}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:34px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--surface);font-family:var(--mono);font-size:12px;display:grid;place-items:center}
+table.t{border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14.5px;width:100%}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 9px;text-align:center}
+table.t th{background:var(--soft);font-weight:600}
+table.t td.l,table.t th.l{text-align:left}
+table.t tr.cp td{color:var(--crit);font-weight:600}
+svg.fig{width:100%;height:auto;display:block}
+svg.fig text{font-family:var(--mono)}
+.figbox{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:8px}
+.figbox svg{min-width:480px}
+.cap{font-size:13px;color:var(--muted)}
+.qbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.qbar select,.qbar button,.btn{font-family:var(--body);font-size:15px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.score{font-family:var(--mono);font-size:14px;margin-left:auto}
+.q{display:flex;flex-direction:column;gap:10px}
+.q .qh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.q .qn{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;font-family:var(--body);font-size:15.5px;line-height:1.45;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px}
+.opt:hover{border-color:var(--muted)}
+.opt .k{font-family:var(--mono);font-weight:600;color:var(--muted)}
+.opt.right{border-color:var(--ok);background:var(--oktint)}
+.opt.wrong{border-color:var(--crit);background:var(--crittint)}
+.opt[disabled]{cursor:default}
+.why{font-size:15px;padding:10px 12px;border-radius:6px;background:var(--soft)}
+.gen{display:flex;flex-direction:column;gap:10px}
+.ans{font-family:var(--mono);font-size:14.5px;line-height:1.75;background:var(--soft);padding:10px 12px;border-radius:4px;overflow-x:auto;white-space:pre}
+footer{color:var(--muted);font-size:13px;text-align:center;padding-block:24px}
+
+/* worked-guide components */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.fb{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--soft);display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0}
+.fb .fn{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+.fb span:last-child{color:var(--muted);font-size:13px}
+.eq{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 2px;min-width:0}
+.eq mjx-container[display="true"]{margin:2px 0!important}
+.ex{display:flex;flex-direction:column;gap:10px;min-width:0}
+.stp{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;background:var(--surface);min-width:0}
+.sh{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sn{width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:13px;display:grid;place-items:center;font-weight:600;flex:none}
+.ref{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-left:auto}
+.why{font-size:15px}
+.why>b:first-child{color:var(--accent)}
+.out{font-family:var(--mono);font-size:13.5px;background:var(--oktint);border-radius:4px;padding:7px 10px;border-left:3px solid var(--ok)}
+.out.bad{background:var(--crittint);border-left-color:var(--crit)}
+.given{background:var(--soft);border-radius:6px;padding:10px 12px;font-size:15px}
+.tree{display:flex;flex-direction:column;gap:6px}
+.tree .q{font-weight:600;padding-top:4px}
+.tree .a{margin-left:18px;padding:6px 10px;border-left:2px solid var(--line);font-size:15px}
+.tree .a.yes{border-left-color:var(--accent)}
+details.try{border:1px dashed var(--accent);border-radius:6px;padding:8px 12px;display:flex;flex-direction:column;gap:8px}
+details.try summary{cursor:pointer;color:var(--accent);font-weight:600}
+svg.n text{fill:var(--ink)} svg.n text.tm{fill:var(--muted)} svg.n text.ta{fill:var(--accent)} svg.n text.tc{fill:var(--crit)}
+svg.n .ln{stroke:var(--ink);stroke-width:1.4} svg.n .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg.n .la{stroke:var(--accent);fill:none;stroke-width:2} svg.n .lc{stroke:var(--crit);fill:none;stroke-width:2}
+svg.n .fw{fill:var(--tint);stroke:var(--ink);stroke-width:1.2} svg.n .fs{fill:var(--soft)} svg.n .fi{fill:var(--ink)}
+svg.n .fa{fill:var(--accent)} svg.n .fc{fill:var(--crit)} svg.n .fa2{fill:var(--accent);opacity:.75} svg.n .fc2{fill:var(--crit);opacity:.6} svg.n .fa3{fill:var(--accent);opacity:.15}
+@media (max-width:520px){ .eq mjx-container{font-size:82%} .stp{padding:10px 10px} .card{padding:16px} details.mod .body{padding-left:16px;padding-right:16px} details.mod>summary{padding:14px 16px} h2{font-size:26px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="eyebrow">CIVL4334 · Design of Timber Structures</div>
+  <h1>Exam Sprint: 48 hours, zero to pass</h1>
+  <p class="lede">Built from your nine tutorial solutions and the 2021–2025 papers. The paper has had the same three-part shape since 2024, and Part C uses the same calculation recipe every year, so that is where most of your time goes.</p>
+</div></header>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
+  <button role="tab" data-v="plan">Plan</button>
+  <button role="tab" data-v="learn">Learn</button>
+  <button role="tab" data-v="factors">Factor card</button>
+  <button role="tab" data-v="drill">MCQ drill</button>
+  <button role="tab" data-v="numbers">Number drills</button>
+  <button role="tab" data-v="papers">2025 solutions</button>
+</div></nav>
+
+<main><div class="wrap">
+
+<!-- ============ PLAN ============ -->
+<section class="view" id="v-plan">
+  <div class="card">
+    <div class="eyebrow">What you are walking into</div>
+    <h2>120 minutes, open book, 120 marks</h2>
+    <p>10 minutes planning time. Casio FX82 only. <b>Any printed or written material is allowed</b>, so you don't memorise values: you learn where they are in AS1720.1 and practise the recipe until it is automatic. One mark per minute.</p>
+    <div class="scroll"><table class="marks">
+      <thead><tr><th>Part</th><th>Format</th><th>Marks</th><th style="width:30%">Weight</th></tr></thead>
+      <tbody>
+        <tr><td>C</td><td><b>2–3 calculation problems</b> <span class="pill hot">biggest</span><br><span class="cap">load combos → φ and k's → member or joint check → deflection</span></td><td class="n">70</td><td><div class="bar"><i style="width:100%"></i></div></td></tr>
+        <tr><td>B</td><td>6 short answers × 5 (photo of a bad detail, brittle failure, screws, φ)</td><td class="n">30</td><td><div class="bar"><i style="width:43%"></i></div></td></tr>
+        <tr><td>A</td><td>10 multiple choice × 2 (moisture, grading, EWPs, durability, code scope)</td><td class="n">20</td><td><div class="bar"><i style="width:29%"></i></div></td></tr>
+      </tbody></table></div>
+    <div class="note"><b>The big insight.</b> Every Part C problem is the same six steps: write load combinations, divide by k1 to find the critical one, pick φ, pick the k's, look up the strength, multiply. Write every factor with its clause reference. Those lines earn method marks even when a number goes wrong.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Your 48-hour plan</div>
+    <h2>Tick it off as you go</h2>
+    <p class="cap">Day 1 is the main day. If you have less time, cut in this order: bonded-in rods detail, fire, anatomy questions. Never cut load combinations or the member equations. Ticks are saved in this browser.</p>
+    <div class="progress"><span id="pct">0%</span><div class="bar"><i id="pbar" style="width:0%"></i></div><button class="btn" id="resetPlan" type="button">Reset</button></div>
+    <div id="plan"></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">In the exam room</div>
+    <h3>Spend the 120 minutes like this</h3>
+    <ol>
+      <li><b>Planning time (10 min):</b> read Part C first. Mark which problems you know and which tables each one needs.</li>
+      <li><b>Part C first (~75 min):</b> start with the problem you're most confident on. State the category, location and moisture condition before any number.</li>
+      <li><b>Part B (~25 min):</b> about 4 minutes each. Bullets. Name the mechanism, then the fix.</li>
+      <li><b>Part A (~15 min):</b> one pass, never leave a blank.</li>
+      <li>If a value is missing, write "assume X because Y" and keep going. The paper explicitly invites this.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Pack the night before</div>
+    <h3>Tab your AS1720.1 at these pages</h3>
+    <div class="scroll"><table class="t">
+      <tr><th class="l">Tab</th><th class="l">What you look up there</th></tr>
+      <tr><td class="l">Tables 2.1, 2.2</td><td class="l">φ for members and joints</td></tr>
+      <tr><td class="l">Table 2.3 + G1</td><td class="l">k1 by load duration / by load combination</td></tr>
+      <tr><td class="l">Tables 2.4–2.7</td><td class="l">j2 creep, k4 moisture, k7 bearing, k9 sharing</td></tr>
+      <tr><td class="l">Section 3 + Appendix E</td><td class="l">Member equations, slenderness, k12, ρb and ρc</td></tr>
+      <tr><td class="l">H2.1, H2.2, H2.4, H3.1</td><td class="l">Strengths, E, strength group (SD), joint group (JD)</td></tr>
+      <tr><td class="l">Section 4 tables</td><td class="l">4.1 nails, 4.3 k17, 4.4 spacing, 4.6 screws, 4.9/4.10 bolts, 4.12 k17 bolts</td></tr>
+      <tr><td class="l">Table 7.1</td><td class="l">Glulam GL grades</td></tr>
+      <tr><td class="l">AS/NZS 1170.0 Cl 4.2.2, Table 4.1</td><td class="l">Load combinations and ψ factors</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ LEARN ============ -->
+<section class="view" id="v-learn" hidden>
+  <div class="card">
+    <div class="eyebrow">Learn</div>
+    <h2>Step-by-step guides, in mark order</h2>
+    <p>Each guide states the formula, says where every value comes from, then works your tutorial solutions step by step with the reason for each decision. Read a guide, then redo that tutorial from a blank page. Guides 1–10 are Part C; 11–12 feed Parts A and B. Orange edge = a step; green box = the result; red box = it fails.</p>
+  </div>
+  <div id="lessons" style="display:flex;flex-direction:column;gap:12px">
+
+<!-- ================= 0 · HOW EVERY PART C QUESTION WORKS ================= -->
+<details class="mod" open><summary><span class="ttl"><h3>0 · The recipe behind every calculation question</h3><span>Read first · 2 minutes · applies to every guide below</span></span></summary><div class="body">
+<p>Every Part C question, and every tutorial from Q3.1 to Q7.2, is the same comparison: <b>can the member or joint carry the load?</b> The guides below follow these six steps every time, so you always know which step you're on.</p>
+<div class="flow">
+  <div class="fb"><span class="fn">1</span><b>Load combinations</b><span>Factor the loads: 1.35G, 1.2G + 1.5Q …</span></div>
+  <div class="fb"><span class="fn">2</span><b>Critical case</b><span>Largest N*/k<sub>1</sub> wins</span></div>
+  <div class="fb"><span class="fn">3</span><b>Set the factors</b><span>φ, k<sub>1</sub>, k<sub>4</sub>, k<sub>6</sub>, k<sub>9</sub>, k<sub>12</sub> …</span></div>
+  <div class="fb"><span class="fn">4</span><b>Look up strength</b><span>f′<sub>b</sub>, f′<sub>t</sub>, f′<sub>c</sub>, f′<sub>s</sub>, E, Q<sub>k</sub></span></div>
+  <div class="fb"><span class="fn">5</span><b>Capacity</b><span>φ × k's × strength × section</span></div>
+  <div class="fb"><span class="fn">6</span><b>Compare</b><span>Capacity ≥ action → PASS, else resize</span></div>
+</div>
+<p>The general form of every strength check in AS1720.1:</p>
+<div class="eq">\[ \underbrace{R_d}_{\text{design capacity}} = \underbrace{\phi}_{\text{reliability}} \times \underbrace{k_1 k_4 k_6 \ldots}_{\text{modification factors}} \times \underbrace{f'}_{\text{characteristic strength}} \times \underbrace{(A \text{ or } Z)}_{\text{section property}} \;\ge\; \underbrace{S^*}_{\text{design action}} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Symbol</th><th class="l">What it means</th><th class="l">How you get it</th></tr>
+<tr><td>\(S^*\)</td><td class="l">Design action: the factored load effect (N*, M*, V*)</td><td class="l">Statics on the critical load combination</td></tr>
+<tr><td>\(\phi\)</td><td class="l">Capacity factor. Lower when the material is more variable or failure is worse</td><td class="l">Table 2.1 (members), 2.2 (joints), by category</td></tr>
+<tr><td>\(k_1\)</td><td class="l">Load duration. Timber gets weaker the longer a load stays on</td><td class="l">Table 2.3, or Table G1 by combination</td></tr>
+<tr><td>\(k_4\)</td><td class="l">Moisture in service</td><td class="l">Cl 2.4.2: seasoned and dry → 1.0</td></tr>
+<tr><td>\(k_6\)</td><td class="l">Temperature (hot tropical climate)</td><td class="l">Cl 2.4.3: 0.9 north Qld coast, else 1.0</td></tr>
+<tr><td>\(f'\)</td><td class="l">Characteristic strength (5th percentile)</td><td class="l">H2.1 (F-grades), H3.1 (MGP, A17), Table 7.1 (glulam)</td></tr>
+</table></div>
+<div class="note"><b>Two different checks, two different systems.</b> <b>Strength</b> (ULS) uses factored loads, φ and k<sub>1</sub>. <b>Deflection</b> (SLS) uses unfactored loads × ψ, the creep factor j<sub>2</sub> and the mean E, with <b>no φ and no k<sub>1</sub></b>. Mixing the two is the most common way to lose marks.</div>
+</div></details>
+
+<!-- ================= 1 · LOAD COMBINATIONS AND k1 ================= -->
+<details class="mod"><summary><span class="ttl"><h3>1 · Load combinations and the critical case</h3><span>Part C step 1 every year · Q3.1(a), Q3.2(a–b), Q3.4, Q4.4(a–b), 2025 P2(a)</span></span></summary><div class="body">
+<h3>The idea</h3>
+<p>Timber creeps and weakens under sustained load. A load that stays on for 50 years can only use 57% of the short-term strength. So the "worst" combination is not simply the biggest load: you divide each combination by its k<sub>1</sub> to put them on the same footing.</p>
+<div class="figbox">
+<svg class="fig n" viewBox="0 0 640 230" role="img" aria-label="k1 load duration factor for each load duration">
+<text x="320" y="16" text-anchor="middle" class="tm" font-size="12">Longer load → lower k₁ (AS1720.1 Table 2.3)</text>
+<line x1="30" y1="170" x2="620" y2="170" class="lm"/>
+<g font-size="12" text-anchor="middle">
+<rect x="45" y="70" width="70" height="100" class="fa2"/><text x="80" y="62">1.00</text><text x="80" y="188">5 seconds</text><text x="80" y="204" class="tm" font-size="11">wind, earthquake</text><text x="80" y="219" class="ta" font-size="11">joint 1.14</text>
+<rect x="140" y="70" width="70" height="100" class="fa2"/><text x="175" y="62">1.00</text><text x="175" y="188">5 minutes</text><text x="175" y="219" class="ta" font-size="11">joint 1.00</text>
+<rect x="235" y="73" width="70" height="97" class="fa2"/><text x="270" y="65">0.97</text><text x="270" y="188">5 hours</text><text x="270" y="219" class="ta" font-size="11">joint 0.86</text>
+<rect x="330" y="76" width="70" height="94" class="fa2"/><text x="365" y="68">0.94</text><text x="365" y="188">5 days</text><text x="365" y="204" class="tm" font-size="11">crowd, erection</text><text x="365" y="219" class="ta" font-size="11">joint 0.77</text>
+<rect x="425" y="90" width="70" height="80" class="fa2"/><text x="460" y="82">0.80</text><text x="460" y="188">5 months</text><text x="460" y="204" class="tm" font-size="11">floor live, traffic</text><text x="460" y="219" class="ta" font-size="11">joint 0.69</text>
+<rect x="520" y="113" width="70" height="57" class="fa2"/><text x="555" y="105">0.57</text><text x="555" y="188">50+ years</text><text x="555" y="204" class="tm" font-size="11">G, ψₗQ</text><text x="555" y="219" class="ta" font-size="11">joint 0.57</text>
+</g></svg></div>
+<p class="cap">Bar height = k<sub>1</sub> for timber strength. Orange line = k<sub>1</sub> for laterally loaded joints. Fasteners in withdrawal and steel strength always use k<sub>1</sub> = 1.00 (Table 2.3 note).</p>
+
+<h3>The formulas</h3>
+<div class="eq">\[ \begin{aligned}
+\text{(a) Permanent only:}\quad &amp; 1.35G &amp; k_1 &amp;= 0.57\\
+\text{(b) Permanent + long-term live:}\quad &amp; 1.2G + 1.5\,\psi_l Q &amp; k_1 &amp;= 0.57\\
+\text{(c) Permanent + peak live:}\quad &amp; 1.2G + 1.5Q &amp; k_1 &amp;= 0.80 \text{ (5 months) or } 0.94 \text{ (5 days)}\\
+\text{(d) Wind uplift:}\quad &amp; 0.9G + W_u &amp; k_1 &amp;= 1.00 \text{ (members)},\ 1.14 \text{ (joints)}
+\end{aligned} \]</div>
+<div class="eq">\[ \begin{gathered}\text{Critical combination} = \max\left(\frac{N^*}{k_1}\right) \\[6pt] \text{then design with that combination's } N^* \text{ and its own } k_1\end{gathered} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Symbol</th><th class="l">Value</th><th class="l">Where from / why</th></tr>
+<tr><td>1.35, 1.2, 1.5, 0.9</td><td class="l">load factors</td><td class="l">AS/NZS 1170.0 Cl 4.2.2. 1.35G alone covers "what if the dead load is heavier than estimated"; 0.9G is used when dead load <i>helps</i> (holding down against uplift)</td></tr>
+<tr><td>\(\psi_l\)</td><td class="l">0.4 (office, residential)</td><td class="l">AS/NZS 1170.0 Table 4.1. The fraction of live load that is there "permanently" (furniture, stored items)</td></tr>
+<tr><td>\(k_1\)</td><td class="l">by shortest load in the combination</td><td class="l">AS1720.1 Cl 2.4.1.1: a combination lasts only as long as its shortest-acting load. G + Q peaks only while Q is on</td></tr>
+<tr><td>bridges</td><td class="l">1.35G and 1.25G + 1.5Q</td><td class="l">AS5100.2 Table D3 (1.8Q for road traffic with dynamics). Traffic = 5 months → k<sub>1</sub> = 0.8 (AS5100.9 Table 3.7.1)</td></tr>
+</table></div>
+
+<h3>Worked example A · Q3.2 Mezzanine hanger (G = 51 kN, Q = 96 kN, office floor)</h3>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Write each combination</b><span class="ref">AS/NZS 1170.0 Cl 4.2.2</span></div>
+<p class="why"><b>Decision:</b> an office floor has dead load and live load, no wind. So three combinations apply: permanent only, permanent + long-term part of live, permanent + full live. ψ<sub>l</sub> = 0.4 for offices (Table 4.1).</p>
+<div class="eq">\[ \begin{aligned}
+1.35G &amp;= 1.35 \times 51 = 68.85 \text{ kN}\\
+1.2G + 1.5\psi_l Q &amp;= 1.2 \times 51 + 1.5 \times 0.4 \times 96 = 61.2 + 57.6 = 118.8 \text{ kN}\\
+1.2G + 1.5Q &amp;= 1.2 \times 51 + 1.5 \times 96 = 61.2 + 144 = 205.2 \text{ kN}
+\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Give each one its k₁</b><span class="ref">AS1720.1 Table G1</span></div>
+<p class="why"><b>Decision:</b> the first two contain only permanent / long-term loads → 50+ years → 0.57. The third contains the full office live load, which is "floor load applied at frequent but irregular intervals" (Cl 2.4.1.1(b)) → 5 months → 0.80.</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Divide and compare</b><span class="ref">why: Eq 3.4(2) rearranged</span></div>
+<p class="why"><b>Why dividing works:</b> the check is \(\phi k_1 k_4 k_6 f'_t A_t \ge N^*\). Move k<sub>1</sub> across: \(\phi k_4 k_6 f'_t A_t \ge N^*/k_1\). The left side is the same for every combination, so the combination with the biggest \(N^*/k_1\) needs the biggest member.</p>
+<div class="eq">\[ \begin{gathered}\frac{68.85}{0.57} = 120.8 \\[6pt] \frac{118.8}{0.57} = 208.4 \\[6pt] \boxed{\frac{205.2}{0.80} = 256.5}\end{gathered} \]</div>
+<div class="out">Critical: 1.2G + 1.5Q → design with N* = 205.2 kN and k₁ = 0.80</div></div>
+</div>
+
+<h3>Worked example B · Q4.4 Column with crowd load (G = 3.5 kN, Q = 10.5 kN, 5 days)</h3>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Combinations</b><span class="ref">AS/NZS 1170.0 Cl 4.2.2</span></div>
+<div class="eq">\[ \begin{aligned}
+1.2G + 1.5\psi_l Q &amp;= 1.2 \times 3.5 + 1.5 \times 0.4 \times 10.5 = 4.2 + 6.3 = 10.5 \text{ kN}\\
+1.2G + 1.5Q &amp;= 1.2 \times 3.5 + 1.5 \times 10.5 = 4.2 + 15.75 = 19.95 \text{ kN}
+\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Choose k₁ for the peak case</b><span class="ref">Table 2.3 vs Table G1</span></div>
+<p class="why"><b>Decision:</b> the crowd load alone is a 5-day load (Table 2.3 → 0.94). But Table G1 lists the <i>combination</i> "dead + live" as k<sub>1</sub> = 0.80, and the tutorial uses 0.80. Using the lower value is conservative, so if unsure, take the lower k<sub>1</sub> and say why.</p>
+<div class="eq">\[ \begin{gathered}\frac{10.5}{0.57} = 18.42 \\[6pt] \boxed{\frac{19.95}{0.80} = 24.94}\end{gathered} \]</div>
+<div class="out">Critical: 1.2G + 1.5Q → N* = 19.95 kN, k₁ = 0.80</div></div>
+</div>
+
+<h3>Worked example C · Q3.1 Bridge chord (G = 150 kN, Q = 200 kN)</h3>
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Bridge combinations and k₁</b><span class="ref">AS5100.2 Table D3, AS5100.9 Table 3.7.1</span></div>
+<p class="why"><b>Decision:</b> bridges use AS5100, not AS/NZS 1170.0. Only two strength combinations apply: 1.35G (minimum strength) and 1.25G + 1.5Q (pedestrian traffic). Traffic is "frequent but irregular", so 5 months → k<sub>1</sub> = 0.8.</p>
+<div class="eq">\[ \begin{gathered}\frac{1.35 \times 150}{0.57} = \frac{202.5}{0.57} = 355 \\[6pt] \boxed{\frac{1.25 \times 150 + 1.5 \times 200}{0.80} = \frac{487.5}{0.80} = 609}\end{gathered} \]</div>
+<div class="out">Critical: N* = 487.5 kN, k₁ = 0.8</div></div>
+
+<h3>Worked example D · Q3.4 When there's no combination to compare</h3>
+<p>Q3.4 asks for the <b>capacity</b> of a tie under three separate scenarios, so there's no "critical" one: each gets its own k<sub>1</sub> and its own capacity.</p>
+<div class="scroll"><table class="t">
+<tr><th class="l">Scenario</th><th>Shortest load</th><th>k₁</th><th class="l">Source</th></tr>
+<tr><td class="l">Permanent only</td><td>50+ years</td><td>0.57</td><td class="l">Table G1</td></tr>
+<tr><td class="l">Permanent + wind</td><td>5 seconds</td><td>1.00</td><td class="l">Table G1</td></tr>
+<tr><td class="l">Permanent + alpine snow</td><td>5 months</td><td>0.80</td><td class="l">No G1 row → Table 2.3 + Cl 2.4.1.1(e): alpine snow = 5 months</td></tr>
+</table></div>
+
+<h3>Your turn · 2025 Problem 2(a): G = 0.6 kN, Q = 2.1 kN (office, 5 months)</h3>
+<details class="try"><summary>Show the answer</summary>
+<div class="eq">\[ \begin{aligned}
+1.35G &amp;= 0.81 &amp;\Rightarrow\ &amp; 0.81/0.57 = 1.42\\
+1.2G + 1.5(0.4)Q &amp;= 0.72 + 1.26 = 1.98 &amp;\Rightarrow\ &amp; 1.98/0.57 = 3.47\\
+1.2G + 1.5Q &amp;= 0.72 + 3.15 = 3.87 &amp;\Rightarrow\ &amp; \boxed{3.87/0.80 = 4.84}
+\end{aligned} \]</div>
+<div class="out">Critical: N* = 3.87 kN with k₁ = 0.8</div></details>
+</div></details>
+
+<!-- ================= 2 · φ AND THE k FACTORS ================= -->
+<details class="mod"><summary><span class="ttl"><h3>2 · Choosing φ and every k factor</h3><span>Part C step 3 every year · each factor is one yes/no question</span></span></summary><div class="body">
+<p>Each factor answers one question about the situation. Write them in the same order every time, each with its source. That line alone earns method marks.</p>
+
+<h3>φ: first decide the category</h3>
+<div class="tree">
+<div class="q">Is the member <b>primary</b> in a post-disaster or essential-services structure (hospital, bridge with post-disaster function)?</div>
+<div class="a yes">Yes → <b>Category 3</b> (Q3.1 bridge chord)</div>
+<div class="q">Is it a <b>primary</b> member in anything that is not a house, or a house element whose failure would affect more than 25 m²?</div>
+<div class="a yes">Yes → <b>Category 2</b> (Q3.2 warehouse hanger, Q3.4 shopping-centre tie, Q4.4 column, Q5.3 beam, Q6.1 primary truss, 2025 P2 office stud)</div>
+<div class="a">Otherwise (house element affecting &lt; 25 m², or any <b>secondary</b> member) → <b>Category 1</b> (Q5.6 house joist, Q7.1 secondary truss)</div>
+</div>
+<p>Then read φ from the row for the material:</p>
+<div class="scroll"><table class="t">
+<tr><th class="l">Material / fastener (AS1720.1 Tables 2.1, 2.2)</th><th>Cat 1</th><th>Cat 2</th><th>Cat 3</th></tr>
+<tr><td class="l">Sawn: MGP15, A17, F17 and higher F-grades</td><td>0.95</td><td>0.85</td><td>0.75</td></tr>
+<tr><td class="l">Sawn: all other grades (MGP10, MGP12, F14 and lower)</td><td>0.90</td><td>0.70</td><td>0.60</td></tr>
+<tr><td class="l">Glulam</td><td>0.95</td><td>0.85</td><td>0.75</td></tr>
+<tr><td class="l">LVL</td><td>0.95</td><td>0.90</td><td>0.80</td></tr>
+<tr><td class="l">Nails, screws, bolts ≤ M16</td><td>0.85</td><td>0.80</td><td>0.75</td></tr>
+<tr><td class="l">Bolts &gt; M16</td><td>0.75</td><td>0.65</td><td>0.60</td></tr>
+</table></div>
+<p class="why"><b>Why the numbers differ:</b> higher-quality grades and engineered products (LVL) vary less, so they get a higher φ. Joints get a lower φ than members because they can fail in brittle ways. A more serious category gets a lower φ so the structure is more reliable.</p>
+
+<h3>k₄ moisture · k₆ temperature</h3>
+<div class="eq">\[ k_4 = \begin{cases} 1.0 &amp; \text{seasoned, EMC} \le 15\% \ \text{(almost every question)}\\ \max\left(1 - 0.3\,\dfrac{\text{EMC} - 15}{10},\ 0.7\right) &amp; \text{seasoned but EMC} \gt 15\%\\ 1.0 &amp; \text{unseasoned}\ (\ge 1.0 \text{ from Table 2.5 only if it partly dries before full load}) \end{cases} \]</div>
+<div class="eq">\[ k_6 = \begin{cases} 0.9 &amp; \text{coastal Queensland north of } 25^\circ\text{S, or anywhere north of } 16^\circ\text{S}\\ 1.0 &amp; \text{everywhere else (Brisbane, Adelaide, Ballarat, Melbourne, Mt Gambier)} \end{cases} \]</div>
+<p class="cap">Table 2.5 (least dimension → k₄): ≤ 38 mm 1.15 · 50 mm 1.10 · 75 mm 1.05 · ≥ 100 mm 1.00. Q3.1's 200 mm chord → 1.00.</p>
+
+<h3>k₇ bearing length (bearing checks only)</h3>
+<p>A short bearing spreads the load into the surrounding wood, so it can take a higher stress. Table 2.6: 12 → 1.75, 25 → 1.40, 50 → 1.20, 75 → 1.15, 125 → 1.10, ≥ 150 → 1.00. Between two rows, interpolate linearly:</p>
+<div class="eq">\[ \begin{gathered}k_7 = k_{7,\text{low}} + (k_{7,\text{high}} - k_{7,\text{low}}) \frac{\ell - \ell_\text{low}}{\ell_\text{high} - \ell_\text{low}} \\[6pt] \begin{aligned}\text{Q5.3: } k_7 &= 1.15 + (1.10 - 1.15)\frac{105 - 75}{125 - 75} \\ &= 1.15 - 0.03 = 1.12\end{aligned}\end{gathered} \]</div>
+
+<h3>k₉ strength sharing (bending only, sawn timber only)</h3>
+<p>When several joists sit side by side under one floor, a weak joist sags a little and passes load to its neighbours. k<sub>9</sub> credits that teamwork.</p>
+<div class="eq">\[ k_9 = g_{31} + (g_{32} - g_{31})\left(1 - \frac{2s}{L}\right) \ge 1.0 \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Symbol</th><th class="l">Meaning</th><th class="l">Q5.6 value</th></tr>
+<tr><td>\(g_{31}\)</td><td class="l">factor for the number of members fastened together as one (n<sub>com</sub>), Table 2.7</td><td class="l">n<sub>com</sub> = 1 → 1.0</td></tr>
+<tr><td>\(g_{32}\)</td><td class="l">factor for the number of members sharing (n<sub>mem</sub>), Table 2.7</td><td class="l">n<sub>mem</sub> = 3 → 1.2</td></tr>
+<tr><td>\(s\), \(L\)</td><td class="l">joist spacing, joist span</td><td class="l">0.6 m, 3.0 m</td></tr>
+</table></div>
+<p class="cap">k₉ = 1.0 for single members, truss chords, and never applies to glulam, LVL or plywood (Cl 2.4.5.1).</p>
+
+<h3>k₁₂ stability (compression members and beams that can buckle sideways)</h3>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 250" role="img" aria-label="k12 against rho S">
+<g font-size="11"><line x1="52" x2="512" y1="210" y2="210" class="lm" opacity=".5"/><text x="44" y="214" text-anchor="end" class="tm">0.00</text><line x1="52" x2="512" y1="165" y2="165" class="lm" opacity=".5"/><text x="44" y="169" text-anchor="end" class="tm">0.25</text><line x1="52" x2="512" y1="120" y2="120" class="lm" opacity=".5"/><text x="44" y="124" text-anchor="end" class="tm">0.50</text><line x1="52" x2="512" y1="75" y2="75" class="lm" opacity=".5"/><text x="44" y="79" text-anchor="end" class="tm">0.75</text><line x1="52" x2="512" y1="30" y2="30" class="lm" opacity=".5"/><text x="44" y="34" text-anchor="end" class="tm">1.00</text><text x="52" y="228" text-anchor="middle" class="tm">0</text><text x="167" y="228" text-anchor="middle" class="tm">10</text><text x="282" y="228" text-anchor="middle" class="tm">20</text><text x="397" y="228" text-anchor="middle" class="tm">30</text><text x="512" y="228" text-anchor="middle" class="tm">40</text>
+<line x1="167" x2="167" y1="30" y2="210" class="lm" stroke-dasharray="3 3"/><line x1="282" x2="282" y1="30" y2="210" class="lm" stroke-dasharray="3 3"/>
+<polyline points="52.0,30.0 57.8,30.0 63.5,30.0 69.2,30.0 75.0,30.0 80.8,30.0 86.5,30.0 92.2,30.0 98.0,30.0 103.8,30.0 109.5,30.0 115.2,30.0 121.0,30.0 126.8,30.0 132.5,30.0 138.2,30.0 144.0,30.0 149.8,30.0 155.5,30.0 161.2,30.0 167.0,30.0 172.8,34.5 178.5,39.0 184.2,43.5 190.0,48.0 195.8,52.5 201.5,57.0 207.2,61.5 213.0,66.0 218.8,70.5 224.5,75.0 230.2,79.5 236.0,84.0 241.8,88.5 247.5,93.0 253.2,97.5 259.0,102.0 264.8,106.5 270.5,111.0 276.2,115.5 282.0,120.0 287.8,124.3 293.5,128.4 299.2,132.1 305.0,135.6 310.8,138.9 316.5,141.9 322.2,144.8 328.0,147.5 333.8,150.0 339.5,152.4 345.2,154.6 351.0,156.7 356.8,158.7 362.5,160.6 368.2,162.4 374.0,164.1 379.8,165.7 385.5,167.2 391.2,168.6 397.0,170.0 402.8,171.3 408.5,172.5 414.2,173.7 420.0,174.8 425.8,175.9 431.5,176.9 437.2,177.9 443.0,178.9 448.8,179.8 454.5,180.6 460.2,181.4 466.0,182.2 471.8,183.0 477.5,183.7 483.2,184.4 489.0,185.1 494.8,185.7 500.5,186.3 506.2,186.9 512.0,187.5" class="la"/>
+<text x="70" y="22">k₁₂ = 1</text><text x="185" y="50">1.5 − 0.05ρS</text><text x="350" y="120">200/(ρS)²</text>
+<circle cx="435" cy="177.6" r="4.5" class="fc"/><text x="443" y="170" class="tc">Q4.4: 33.3 → 0.18</text>
+<circle cx="163" cy="30" r="4.5" class="fa"/><text x="140" y="62" class="ta">Q6.1 bending: 9.7 → 1.0</text>
+<text x="282" y="246" text-anchor="middle" class="tm">ρS (material constant × slenderness)</text></g>
+</svg></div>
+<div class="eq">\[ k_{12} = \begin{cases} 1.0 &amp; \rho S \le 10 \quad \text{(stocky: full strength)}\\ 1.5 - 0.05\,\rho S &amp; 10 \lt \rho S \le 20 \quad \text{(transition)}\\ \dfrac{200}{(\rho S)^2} &amp; \rho S \gt 20 \quad \text{(slender: buckling governs)} \end{cases} \]</div>
+<div class="scroll"><table class="t">
+<tr><th class="l">Slenderness S</th><th class="l">Formula</th><th class="l">Use when</th></tr>
+<tr><td class="l">\(S_1\) beam</td><td class="l">\(1.25\,\dfrac{d}{b}\left(\dfrac{L_{ay}}{d}\right)^{0.5}\)</td><td class="l">compression edge restrained at points L<sub>ay</sub> apart. Continuously restrained (floor nailed on top) → S<sub>1</sub> = 0 → k<sub>12</sub> = 1</td></tr>
+<tr><td class="l">\(S_3\) column, major axis</td><td class="l">\(\dfrac{L_{ax}}{d} = \dfrac{g_{13} L}{d}\)</td><td class="l">buckling across the deep dimension d</td></tr>
+<tr><td class="l">\(S_4\) column, minor axis</td><td class="l">\(\dfrac{L_{ay}}{b}\) (discrete restraints) or \(\dfrac{g_{13} L}{b}\)</td><td class="l">buckling across the thin dimension b</td></tr>
+</table></div>
+<div class="eq">\[ \begin{gathered}\rho_b = 14.71\left(\frac{E}{f'_b}\right)^{-0.480} r^{-0.061} \\[6pt] \rho_c = 11.39\left(\frac{E}{f'_c}\right)^{-0.408} r^{-0.074} \\[6pt] r = \frac{\text{temporary action}}{\text{total action}}\end{gathered} \]</div>
+<p class="why"><b>Where ρ comes from:</b> either compute it from these Appendix E formulas with the actual r, or read Tables 3.1 / 3.3, which assume r = 0.25. Higher r (more short-term load) gives a slightly lower ρ, i.e. less creep-buckling, i.e. a higher k<sub>12</sub>. Table 3.3 (r = 0.25) is the conservative shortcut.</p>
+<p class="cap">g₁₃ (Table 3.2): flat ends / both fixed 0.7 · two bolts each end 0.75 · fixed + pinned 0.85 · studs in light framing 0.9 · pinned–pinned 1.0 · fixed + partly restrained 1.5 · cantilever 2.0.</p>
+</div></details>
+
+<!-- ================= 3 · TENSION ================= -->
+<details class="mod"><summary><span class="ttl"><h3>3 · Tension members</h3><span>Q3.1 bridge chord · Q3.2 mezzanine hanger · Q3.4 roof tie</span></span></summary><div class="body">
+<div class="eq">\[ \begin{gathered}N_{d,t} = \phi\, k_1\, k_4\, k_6\, f'_t\, A_t \ \ge\ N_t^* \\[6pt] \text{(AS1720.1 Eq 3.4(1), 3.4(2))}\end{gathered} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Symbol</th><th class="l">Meaning</th><th class="l">Watch out</th></tr>
+<tr><td>\(f'_t\)</td><td class="l">characteristic tension strength parallel to grain</td><td class="l">F-grades: hardwood and softwood columns differ (H2.1). F-grades wider than 150 mm: × (150/d)<sup>0.167</sup></td></tr>
+<tr><td>\(A_t\)</td><td class="l"><b>net</b> area at the weakest cross-section</td><td class="l">Subtract bolt holes in that section. Nails and nail plates: no deduction</td></tr>
+</table></div>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 210" role="img" aria-label="Net area of a member with a bolt hole">
+<text x="140" y="18" text-anchor="middle" font-size="12">Elevation: bolts on the centre-line</text>
+<rect x="110" y="30" width="60" height="165" class="fw"/>
+<line x1="140" y1="30" x2="140" y2="195" class="lm" stroke-dasharray="3 3"/>
+<circle cx="140" cy="70" r="6" class="fs ln"/><circle cx="140" cy="112" r="6" class="fs ln"/><circle cx="140" cy="154" r="6" class="fs ln"/>
+<line x1="60" y1="112" x2="230" y2="112" class="lc" stroke-dasharray="5 3"/><text x="235" y="116" font-size="11" class="tc">critical section</text>
+<text x="400" y="18" text-anchor="middle" font-size="12">Section at a hole (2 boards)</text>
+<rect x="300" y="60" width="95" height="40" class="fw"/><rect x="405" y="60" width="95" height="40" class="fw"/>
+<rect x="343" y="60" width="9" height="40" class="fc2"/><rect x="448" y="60" width="9" height="40" class="fc2"/>
+<line x1="300" y1="122" x2="395" y2="122" class="lm"/><text x="347" y="138" text-anchor="middle" font-size="11">b = 190</text>
+<text x="347" y="54" text-anchor="middle" font-size="11" class="tc">hole D = 17.6</text>
+<line x1="510" y1="60" x2="510" y2="100" class="lm"/><text x="516" y="84" font-size="11">t = 45</text>
+<text x="400" y="170" text-anchor="middle" font-size="12">A_t = (b − D) × t × 2</text>
+</svg></div>
+
+<h3>Worked example · Q3.2 A17 hanger, M16 bolts, Ballarat (continues from Lesson 1)</h3>
+<div class="given"><b>Given:</b> N* = 205.2 kN, k₁ = 0.8 (critical, Lesson 1) · A17 seasoned · M16 bolts on the centre-line · primary member in a commercial warehouse · Ballarat (Vic)</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Set the factors</b><span class="ref">Tables 2.1, Cl 2.4.2, 2.4.3</span></div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th>Value</th><th class="l">Decision</th></tr>
+<tr><td>φ</td><td>0.85</td><td class="l">Primary member, not a house → Category 2. A17 is in the "MGP15, A17, F17+" row → 0.85</td></tr>
+<tr><td>k₁</td><td>0.80</td><td class="l">From the critical combination (Lesson 1)</td></tr>
+<tr><td>k₄</td><td>1.0</td><td class="l">A17 is a seasoned grade, used indoors</td></tr>
+<tr><td>k₆</td><td>1.0</td><td class="l">Ballarat is far south of 25°S</td></tr>
+</table></div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Pick a thickness and read f′ₜ</b><span class="ref">Table H3.1</span></div>
+<p class="why"><b>Decision:</b> A17 strength depends on the section size, so assume a size to read a value. Try t = 45 mm boards in the 140/190 depth band → f′<sub>t</sub> = 21 MPa. You'll confirm the depth band once you've sized it.</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Solve for the net width you need</b><span class="ref">Eq 3.4(2) rearranged</span></div>
+<p class="why"><b>Why rearrange:</b> with A<sub>t</sub> = b<sub>net</sub> × t, the only unknown is b<sub>net</sub>, so solve for it directly rather than guessing.</p>
+<div class="eq">\[ \begin{aligned}b_\text{net} &\ge \frac{N^*}{\phi k_1 k_4 k_6 f'_t\, t} \\ &= \frac{205.2 \times 10^3}{0.85 \times 0.8 \times 1.0 \times 1.0 \times 21 \times 45} \\ &= \frac{205\,200}{642.6} = 319.3 \text{ mm}\end{aligned} \]</div>
+<div class="out">Need about 320 mm of net width → no single standard board is that wide → try 2 × (190 × 45)</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Deduct the bolt hole</b><span class="ref">Cl 4.4.1</span></div>
+<p class="why"><b>Decision:</b> the bolt hole removes timber exactly where the force passes, so the net section at a hole is critical. Cl 4.4.1 sizes the hole 10% bigger than the bolt.</p>
+<div class="eq">\[ \begin{gathered}D_\text{hole} = 16 \times 1.1 = 17.6 \text{ mm} \\[6pt] A_t = (b - D_\text{hole})\, t \times 2 = (190 - 17.6) \times 45 \times 2 = 15\,516 \text{ mm}^2\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Capacity check</b><span class="ref">Eq 3.4(2)</span></div>
+<div class="eq">\[ \begin{aligned}N_{d,t} &= 0.85 \times 0.80 \times 1.0 \times 1.0 \times 21 \times 15\,516 = 221\,568 \text{ N} \\ &= 221.6 \text{ kN} \ \ge \ 205.2 \text{ kN}\end{aligned} \]</div>
+<div class="out">PASS: 2 × (190 × 45) A17, 93% utilised (205.2 / 221.6)</div></div>
+</div>
+
+<h3>Worked example · Q3.1 Unseasoned F14 bridge chord (size effect)</h3>
+<div class="given"><b>Given:</b> N* = 487.5 kN, k₁ = 0.8 · unseasoned F14 hardwood · thickness 200 mm · M28 bolts in 30 mm holes, two holes across the depth · post-disaster bridge</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Factors</b><span class="ref">AS5100.9 Table 3.2, AS1720.1 Tables 2.1, 2.5</span></div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th>Value</th><th class="l">Decision</th></tr>
+<tr><td>φ</td><td>0.6</td><td class="l">Failure collapses a post-disaster bridge → Category 3. F14 is "below F17" → 0.6 (AS1720.1 Table 2.1 gives the same)</td></tr>
+<tr><td>k₁</td><td>0.8</td><td class="l">Traffic = 5 months</td></tr>
+<tr><td>k₄</td><td>1.0</td><td class="l">Unseasoned, least dimension 200 mm ≥ 100 → Table 2.5 gives 1.0</td></tr>
+<tr><td>k₆</td><td>1.0</td><td class="l">Assume not in the tropics</td></tr>
+<tr><td>f′ₜ</td><td>22 × (150/d)<sup>0.167</sup></td><td class="l">F14 unseasoned hardwood, 22 MPa (AS5100.9 Table A1). Wider than 150 mm → size factor, because a bigger piece is more likely to contain a critical defect</td></tr>
+</table></div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Write A<sub>t</sub> in terms of the unknown depth d</b></div>
+<div class="eq">\[ \begin{gathered}A_t = 200\,(d - 2 \times 30) \\[6pt] \text{(two 30 mm holes across the depth)}\end{gathered} \]</div>
+<p class="why"><b>Decision:</b> d appears in both A<sub>t</sub> and the size factor, so solving algebraically is messy. Try standard sizes instead (one board = 150 or 200 mm deep).</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Try 2 × 150 = 300 mm</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,t} &= 0.6 \times 0.8 \times 1.0 \times 1.0 \times 22 \times \left(\tfrac{150}{300}\right)^{0.167} \times 200\,(300 - 60) \\ &= 10.56 \times 0.891 \times 48\,000 = 451.5 \text{ kN} \lt 487.5\end{aligned} \]</div>
+<div class="out bad">FAIL → go deeper</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Try 2 × 200 = 400 mm</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,t} &= 0.6 \times 0.8 \times 22 \times \left(\tfrac{150}{400}\right)^{0.167} \times 200\,(400 - 60) \\ &= 10.56 \times 0.849 \times 68\,000 = 609.6 \text{ kN} \ge 487.5\end{aligned} \]</div>
+<div class="out">PASS: 200 × 400 chord. Actual f′ₜ = 22 × 0.849 = 18.7 MPa</div></div>
+</div>
+
+<h3>Worked example · Q3.4 F8 radiata tie, 240 × 35, nailed ply gussets</h3>
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Factors and area</b><span class="ref">Tables 2.1, H2.1</span></div>
+<p class="why"><b>Decisions:</b> primary member in a shopping centre → Cat 2; F8 is "all other grades" → φ = 0.70. F-grade pine here is seasoned → k₄ = 1. Perisher isn't tropical → k₆ = 1. Pine is a <b>softwood</b> → use the softwood column of H2.1: f′<sub>t</sub> = 12 MPa, then size factor because d = 240 &gt; 150. Nailed gussets → no holes → A<sub>t</sub> = gross area.</p>
+<div class="eq">\[ \begin{gathered}f'_t = 12 \times \left(\tfrac{150}{240}\right)^{0.167} = 11.1 \approx 11 \text{ MPa} \\[6pt] A_t = 240 \times 35 = 8\,400 \text{ mm}^2\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>One capacity per scenario (k₁ from Lesson 1)</b></div>
+<div class="eq">\[ \begin{aligned}
+\text{Permanent:}\ &amp; 0.70 \times 0.57 \times 11 \times 8\,400 = 36.9 \text{ kN}\\
+\text{Permanent + wind:}\ &amp; 0.70 \times 1.00 \times 11 \times 8\,400 = 64.7 \text{ kN}\\
+\text{Permanent + alpine snow:}\ &amp; 0.70 \times 0.80 \times 11 \times 8\,400 = 51.7 \text{ kN}
+\end{aligned} \]</div>
+<div class="out">Same member, three capacities: only k₁ changes</div></div>
+</div></details>
+
+<!-- ================= 4 · COMPRESSION ================= -->
+<details class="mod"><summary><span class="ttl"><h3>4 · Compression members (columns and studs)</h3><span>Q4.4 isolated column · 2025 Problem 2 stud wall</span></span></summary><div class="body">
+<div class="eq">\[ \begin{gathered}N_{d,c} = \phi\, k_1\, k_4\, k_6\, k_{12}\, f'_c\, A_c \ \ge\ N_c^* \\[6pt] \text{(Eq 3.3(1), 3.3(2))}, \\[6pt] A_c = b \times d \ \text{(gross)}\end{gathered} \]</div>
+<p>A column can buckle two ways: across its deep side (major axis) or across its thin side (minor axis). Work out k<sub>12</sub> for <b>both</b> and use the <b>smaller</b> one.</p>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 260" role="img" aria-label="Column buckling about major and minor axes">
+<text x="110" y="18" text-anchor="middle" font-size="12">Cross-section</text>
+<rect x="60" y="40" width="40" height="120" class="fw"/><rect x="100" y="40" width="40" height="120" class="fw"/>
+<line x1="40" y1="100" x2="160" y2="100" class="la"/><text x="166" y="104" font-size="11" class="ta">x (major)</text>
+<line x1="100" y1="28" x2="100" y2="172" class="lc"/><text x="100" y="186" text-anchor="middle" font-size="11" class="tc">y (minor)</text>
+<text x="100" y="205" text-anchor="middle" font-size="11">b = 90 (2 × 45)</text><text x="30" y="104" text-anchor="end" font-size="11">d</text>
+<text x="330" y="18" text-anchor="middle" font-size="12">Buckles across d (S₃ = L/d)</text>
+<line x1="300" y1="35" x2="300" y2="235" class="lm" stroke-dasharray="3 3"/>
+<path d="M300,35 Q340,135 300,235" class="la"/><text x="345" y="140" font-size="11" class="ta">stiff way</text>
+<text x="470" y="18" text-anchor="middle" font-size="12">Buckles across b (S₄ = L/b)</text>
+<line x1="450" y1="35" x2="450" y2="235" class="lm" stroke-dasharray="3 3"/>
+<path d="M450,35 Q520,135 450,235" class="lc"/><text x="497" y="140" font-size="11" class="tc">weak way</text>
+<text x="280" y="252" font-size="11" class="tm">Thinner dimension → larger S → smaller k₁₂ → usually governs</text>
+</svg></div>
+
+<h3>Worked example · Q4.4 Isolated column, 2 × 45 F17 blackbutt, 3.0 m, Grafton house</h3>
+<div class="given"><b>Given:</b> N* = 19.95 kN, k₁ = 0.8 (Lesson 1) · total thickness b = 90 mm · depth d to be found · no bracing, g₁₃ = 1.0 both ways · f′<sub>c</sub> = 34 MPa (F17, H2.1)</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>φ, k₄, k₆</b><span class="ref">Table 2.1, Cl 2.4.2–2.4.3</span></div>
+<p class="why"><b>Decisions:</b> a column holding up a living room affects more than 25 m² → Cat 2 even in a house. F17 → 0.85. Seasoned → k₄ = 1. Grafton (northern NSW) is not in the Qld tropical zone → k₆ = 1.</p></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Slenderness about the minor axis</b><span class="ref">Eq 3.3(8), 3.3(9)</span></div>
+<p class="why"><b>Decision:</b> d is unknown, but b = 90 is fixed. Assume d ≥ 90 so the 90 side is the minor axis (it buckles across b).</p>
+<div class="eq">\[ \begin{gathered}L_{ay} = g_{13} L = 1.0 \times 3000 = 3000 \text{ mm} \\[6pt] S_4 = \frac{L_{ay}}{b} = \frac{3000}{90} = 33.33\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Material constant ρ<sub>c</sub> from the actual r</b><span class="ref">Appendix E, Table E3</span></div>
+<p class="why"><b>Why compute r:</b> ρ<sub>c</sub> depends on how much of the load is short-term (less creep). r is the ratio of temporary action to total action <i>in this combination</i>:</p>
+<div class="eq">\[ \begin{aligned}r &= \frac{1.5Q}{1.2G + 1.5Q} = \frac{1.5 \times 10.5}{1.2 \times 3.5 + 1.5 \times 10.5} \\ &= \frac{15.75}{19.95} = 0.789 \ \Rightarrow \ \rho_c \\ &= 1.0 \ \text{(Table E3, F17 seasoned)}\end{aligned} \]</div>
+<p class="cap">Check: Table 3.3 gives ρ<sub>c</sub> = 1.08 for F17 at r = 0.25; scaling by r<sup>−0.074</sup> gives 1.08 × (0.789/0.25)<sup>−0.074</sup> = 0.99 ≈ 1.0. Using 1.08 would be conservative.</p></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>k₁₂</b><span class="ref">Cl 3.3.3, Eq 3.3(11c)</span></div>
+<div class="eq">\[ \begin{aligned}\rho_c S_4 &= 1.0 \times 33.33 = 33.33 \gt 20 \ \\ &\Rightarrow \ k_{12} = \frac{200}{(\rho_c S_4)^2} \\ &= \frac{200}{33.33^2} = 0.180\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Solve for the depth d</b><span class="ref">Eq 3.3(2) rearranged</span></div>
+<div class="eq">\[ \begin{aligned}d &\ge \frac{N^*}{\phi k_1 k_4 k_6 k_{12} f'_c\, b} \\ &= \frac{19\,950}{0.85 \times 0.8 \times 1 \times 1 \times 0.180 \times 34 \times 90} = \frac{19\,950}{374.5} \\ &= 53.3 \text{ mm}\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">6</span><b>Trap: try d = 70 and recheck</b></div>
+<p class="why"><b>Why it fails:</b> 70 &lt; 90, so now <b>70 is the thin side</b>. The minor axis has swapped and the slenderness gets worse. The assumption from step 2 is broken.</p>
+<div class="eq">\[ \begin{aligned}S &= \frac{3000}{70} = 42.86 \ \Rightarrow \ k_{12} \\ &= \frac{200}{42.86^2} = 0.109 \ \Rightarrow \ N_{d,c} \\ &= 0.85 \times 0.8 \times 0.109 \times 34 \times (70 \times 90) = 15.9 \text{ kN} \lt 19.95\end{aligned} \]</div>
+<div class="out bad">FAIL with d = 70</div></div>
+<div class="stp"><div class="sh"><span class="sn">7</span><b>Use d = 90 (a square 90 × 90 column)</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,c} &= 0.85 \times 0.8 \times 1 \times 1 \times 0.180 \times 34 \times (90 \times 90) = 33.7 \text{ kN} \\ &\ge 19.95 \text{ kN}\end{aligned} \]</div>
+<div class="out">PASS: 2 × (90 × 45) F17, 59% utilised</div></div>
+</div>
+
+<h3>Worked example · 2025 Problem 2 MGP10 stud, 90 × 35, 2.7 m, noggin at mid-height</h3>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 250" role="img" aria-label="Stud wall elevation with noggin at mid-height">
+<rect x="60" y="20" width="10" height="210" class="fw"/><rect x="160" y="20" width="10" height="210" class="fw"/><rect x="260" y="20" width="10" height="210" class="fw"/>
+<rect x="70" y="120" width="90" height="8" class="fw"/><rect x="170" y="120" width="90" height="8" class="fw"/>
+<text x="165" y="245" text-anchor="middle" font-size="11">studs + noggins (front view)</text>
+<line x1="40" y1="20" x2="40" y2="230" class="lm"/><text x="34" y="128" text-anchor="end" font-size="11">2700</text>
+<text x="400" y="14" text-anchor="middle" font-size="12">Minor axis: noggin stops it</text>
+<line x1="370" y1="20" x2="370" y2="230" class="lm" stroke-dasharray="3 3"/>
+<path d="M370,20 Q405,72 370,124 Q335,176 370,230" class="lc"/>
+<circle cx="370" cy="124" r="4" class="fc"/><text x="380" y="128" font-size="11" class="tc">L_ay = 1350</text>
+<text x="500" y="14" text-anchor="middle" font-size="12">Major axis</text>
+<line x1="490" y1="20" x2="490" y2="230" class="lm" stroke-dasharray="3 3"/>
+<path d="M490,20 Q530,125 490,230" class="la"/><text x="520" y="200" font-size="11" class="ta">0.9 × 2700</text>
+</svg></div>
+<div class="given"><b>Given:</b> N* = 3.87 kN, k₁ = 0.8 (Lesson 1) · MGP10: f′<sub>c</sub> = 18 MPa, E = 10 000 MPa (H3.1) · office → primary member, not a house → Cat 2 → φ = 0.70 · Adelaide → k₆ = 1 · seasoned → k₄ = 1</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>ρ<sub>c</sub> with the combination's own r (tutorial method)</b><span class="ref">Appendix E</span></div>
+<div class="eq">\[ \begin{gathered}r = \frac{1.5 \times 2.1}{3.87} = 0.814 \\[6pt] \begin{aligned}\rho_c &= 11.39\left(\frac{10\,000}{18}\right)^{-0.408} (0.814)^{-0.074} \\ &= 11.39 \times 0.0759 \times 1.015 = 0.878\end{aligned}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Both axes</b><span class="ref">Eq 3.3(5), 3.3(9), Table 3.2</span></div>
+<p class="why"><b>Decisions:</b> major axis: studs in light framing → g<sub>13</sub> = 0.9, full height. Minor axis: the noggin at mid-height holds the stud sideways, so L<sub>ay</sub> = 2700/2 = 1350.</p>
+<div class="eq">\[ \begin{aligned}
+\text{Major: } S_3 &amp;= \frac{0.9 \times 2700}{90} = 27.0, &amp; \rho_c S_3 &amp;= 23.7 \gt 20, &amp; k_{12} &amp;= \frac{200}{23.7^2} = 0.356\\
+\text{Minor: } S_4 &amp;= \frac{1350}{35} = 38.6, &amp; \rho_c S_4 &amp;= 33.8 \gt 20, &amp; k_{12} &amp;= \frac{200}{33.8^2} = \boxed{0.175}
+\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Capacity with the smaller k₁₂</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,c} &= 0.70 \times 0.8 \times 1 \times 1 \times 0.175 \times 18 \times (90 \times 35) = 5.54 \text{ kN} \\ &\ge 3.87 \text{ kN}\end{aligned} \]</div>
+<div class="out">PASS (70% utilised). With the conservative Table 3.3 value ρc = 0.96 (r = 0.25): k₁₂ = 0.147 → 4.65 kN, still PASS</div></div>
+</div>
+</div></details>
+
+<!-- ================= 5 · BEAMS ================= -->
+<details class="mod"><summary><span class="ttl"><h3>5 · Beams: bending, shear and bearing</h3><span>Q5.3 Part 2 glulam beam · Q5.6 floor joists</span></span></summary><div class="body">
+<div class="eq">\[ \begin{aligned}
+\text{Bending:}\quad &amp; M_d = \phi k_1 k_4 k_6 k_9 k_{12}\, f'_b\, Z \ge M^*, &amp; Z &amp;= \frac{b d^2}{6} &amp; &amp;\text{(Cl 3.2.1)}\\
+\text{Shear:}\quad &amp; V_d = \phi k_1 k_4 k_6\, f'_s\, A_s \ge V^*, &amp; A_s &amp;= \frac{2}{3} b d &amp; &amp;\text{(Cl 3.2.5)}\\
+\text{Bearing:}\quad &amp; N_{d,p} = \phi k_1 k_4 k_6 k_7\, f'_p\, A_p \ge N_p^*, &amp; A_p &amp;= b \times \ell_\text{bearing} &amp; &amp;\text{(Cl 3.2.6)}
+\end{aligned} \]</div>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 270" role="img" aria-label="Simply supported beam with UDL, shear and moment diagrams">
+<defs><marker id="arB" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,0 L5,10 z" class="fa"/></marker></defs>
+<g class="la">
+<line x1="80" y1="22" x2="80" y2="44" marker-end="url(#arB)"/><line x1="140" y1="22" x2="140" y2="44" marker-end="url(#arB)"/><line x1="200" y1="22" x2="200" y2="44" marker-end="url(#arB)"/><line x1="260" y1="22" x2="260" y2="44" marker-end="url(#arB)"/><line x1="320" y1="22" x2="320" y2="44" marker-end="url(#arB)"/><line x1="380" y1="22" x2="380" y2="44" marker-end="url(#arB)"/><line x1="440" y1="22" x2="440" y2="44" marker-end="url(#arB)"/><line x1="480" y1="22" x2="480" y2="44" marker-end="url(#arB)"/>
+<line x1="80" y1="22" x2="480" y2="22"/></g>
+<text x="280" y="14" text-anchor="middle" font-size="11" class="ta">w* = 10.8 kN/m</text>
+<rect x="70" y="48" width="420" height="16" class="fw"/>
+<path d="M70,64 l-10,16 h20 z" class="fs ln"/><path d="M490,64 l-10,16 h20 z" class="fs ln"/>
+<text x="280" y="96" text-anchor="middle" font-size="11">L = 7010 mm · N* = wL/2 = 37.9 kN at each support</text>
+<line x1="70" y1="150" x2="490" y2="150" class="lm"/>
+<path d="M70,110 L490,190" class="la"/>
+<line x1="125" y1="110" x2="125" y2="200" class="lc" stroke-dasharray="4 3"/><line x1="435" y1="110" x2="435" y2="200" class="lc" stroke-dasharray="4 3"/>
+<text x="130" y="118" font-size="11" class="tc">1.5d: V* = 31.5</text>
+<text x="40" y="154" font-size="11" text-anchor="end">V</text>
+<line x1="70" y1="215" x2="490" y2="215" class="lm"/>
+<path d="M70,215 Q280,305 490,215" class="la"/>
+<text x="280" y="250" text-anchor="middle" font-size="11" class="ta">M* = wL²/8 = 66.3 kNm</text>
+<text x="40" y="219" font-size="11" text-anchor="end">M</text>
+</svg></div>
+<p class="cap">AS1720.1 lets you ignore load within 1.5d of each support face when calculating V* (Cl 3.2.5): that load goes straight into the support.</p>
+
+<h3>Worked example · Q5.3 Part 2 GL12 beam, span 7.01 m, 105 mm bearings</h3>
+<div class="given"><b>Given:</b> G = 1.5 kN/m, Q = 6 kN/m · GL12: f′<sub>b</sub> = 25, f′<sub>s</sub> = 4.2 MPa (Table 7.1) · starting section 395 × 115 (from deflection, Lesson 6) · joists at 450 mm restrain the top edge</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Critical combination</b><span class="ref">Table G1</span></div>
+<div class="eq">\[ \begin{gathered}\frac{1.35 \times 1.5}{0.57} = \frac{2.03}{0.57} = 3.55 \\[6pt] \begin{aligned}\boxed{\frac{1.2 \times 1.5 + 1.5 \times 6}{0.80} = \frac{10.8}{0.80} = 13.5} \ &\Rightarrow \ w^* \\ &= 10.8 \text{ kN/m},\ k_1 = 0.8\end{aligned}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Design actions</b><span class="ref">statics, Cl 3.2.5</span></div>
+<p class="why"><b>Decision:</b> simply supported with a uniform load, so use the standard formulas. Shear is taken 1.5d from each support (allowed by Cl 3.2.5), which removes 2 × 1.5d of load from the span.</p>
+<div class="eq">\[ \begin{aligned}
+M^* &amp;= \frac{w L^2}{8} = \frac{10.8 \times 7.01^2}{8} = 66.34 \text{ kNm}\\
+V^* &amp;= \frac{w (L - 2 \times 1.5d)}{2} = \frac{10.8\,(7.01 - 3 \times 0.395)}{2} = 31.46 \text{ kN}\\
+N_p^* &amp;= \frac{w L}{2} = \frac{10.8 \times 7.01}{2} = 37.85 \text{ kN}
+\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Factors</b><span class="ref">Tables 2.1, Cl 2.4.5, 7.4.3</span></div>
+<p class="why"><b>Decisions:</b> glulam, primary member, non-house → Cat 2 → φ = 0.85. k₁ = 0.8 (step 1). Seasoned, indoors → k₄ = k₆ = 1. <b>k₉ = 1</b> because strength sharing never applies to glulam (Cl 2.4.5.1 / 7.4.3).</p></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Lateral stability k₁₂</b><span class="ref">Cl 3.2.3.2, Table 7.2A</span></div>
+<p class="why"><b>Decision:</b> the floor joists frame into the beam's top (compression) edge every 450 mm, so L<sub>ay</sub> = 450. ρ<sub>b</sub> for glulam comes from Table 7.2A using r:</p>
+<div class="eq">\[ \begin{gathered}r = \frac{Q}{G + Q} = \frac{6}{7.5} = 0.8 \Rightarrow \rho_b = 0.79 \\[6pt] \begin{aligned}S_1 &= 1.25 \frac{d}{b}\left(\frac{L_{ay}}{d}\right)^{0.5} \\ &= 1.25 \times \frac{395}{115}\left(\frac{450}{395}\right)^{0.5} = 4.58\end{aligned}\end{gathered} \]</div>
+<div class="eq">\[ \rho_b S_1 = 0.79 \times 4.58 = 3.62 \le 10 \ \Rightarrow\ k_{12} = 1.0 \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Bending</b><span class="ref">Eq 3.2(1)</span></div>
+<div class="eq">\[ \begin{gathered}Z = \frac{115 \times 395^2}{6} = 2.99 \times 10^6 \text{ mm}^3 \\[6pt] M_d = 0.85 \times 0.8 \times 1 \times 1 \times 1 \times 1 \times 25 \times 2.99 \times 10^6 = 50.8 \text{ kNm} \lt 66.34\end{gathered} \]</div>
+<div class="out bad">FAIL in bending. Deflection chose 395 deep, but strength needs more</div></div>
+<div class="stp"><div class="sh"><span class="sn">6</span><b>Resize from the required Z</b></div>
+<div class="eq">\[ \begin{aligned}Z_\text{req} &= \frac{M^*}{\phi k_1 k_4 k_6 k_9 k_{12} f'_b} \\ &= \frac{66.34 \times 10^6}{0.85 \times 0.8 \times 25} = 3.90 \times 10^6 \text{ mm}^3 \ \\ &\Rightarrow \ 495 \times 115:\ Z = 4.70 \times 10^6\end{aligned} \]</div>
+<div class="eq">\[ \begin{gathered}M_d = 0.68 \times 25 \times 4.70 \times 10^6 = 79.8 \text{ kNm} \ge 66.34 \\[6pt] \text{(recheck: } S_1 = 5.13,\ \rho_b S_1 = 4.05 \le 10 \Rightarrow k_{12} = 1 \text{ still)}\end{gathered} \]</div>
+<div class="out">PASS in bending with 495 × 115</div></div>
+<div class="stp"><div class="sh"><span class="sn">7</span><b>Shear</b><span class="ref">Eq 3.2(14)</span></div>
+<div class="eq">\[ \begin{gathered}A_s = \frac{2}{3} \times 115 \times 495 = 37\,950 \text{ mm}^2 \\[6pt] V_d = 0.85 \times 0.8 \times 1 \times 1 \times 4.2 \times 37\,950 = 108.4 \text{ kN} \ge 31.5\end{gathered} \]</div>
+<div class="out">PASS. (Your tutorial prints 116.1 kN; the substitution actually gives 108.4 kN. Either way it passes easily.)</div></div>
+<div class="stp"><div class="sh"><span class="sn">8</span><b>Bearing at the support</b><span class="ref">Eq 3.2(16), Tables 2.6, H2.2, H2.4</span></div>
+<p class="why"><b>Decisions:</b> 105 mm bearing → interpolate k₇ = 1.12 (Lesson 2). GL12 is radiata pine → strength group SD6 (H2.4) → f′<sub>p</sub> = 10 MPa (H2.2). Bearing area = beam width × bearing length.</p>
+<div class="eq">\[ \begin{gathered}A_p = 115 \times 105 = 12\,075 \text{ mm}^2 \\[6pt] N_{d,p} = 0.85 \times 0.8 \times 1 \times 1 \times 1.12 \times 10 \times 12\,075 = 92.0 \text{ kN} \ge 37.9\end{gathered} \]</div>
+<div class="out">PASS. Final: GL12 495 × 115 (bending governed)</div></div>
+</div>
+
+<h3>Worked example · Q5.6 MGP12 floor joists, Melbourne house (strength part)</h3>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 190" role="img" aria-label="Floor joists at 600 mm centres sharing load">
+<rect x="40" y="30" width="480" height="120" class="fs"/>
+<rect x="40" y="52" width="480" height="8" class="fw"/><rect x="40" y="86" width="480" height="8" class="fw"/><rect x="40" y="120" width="480" height="8" class="fw"/>
+<rect x="40" y="73" width="480" height="34" class="fa3"/>
+<text x="524" y="94" font-size="11" class="ta" text-anchor="end" dy="-22">600 mm strip</text>
+<text x="280" y="20" text-anchor="middle" font-size="12">Plan: flooring nailed across 3 joists (n_mem = 3)</text>
+<line x1="40" y1="170" x2="520" y2="170" class="lm"/><text x="280" y="184" text-anchor="middle" font-size="11">span L = 3.0 m</text>
+</svg></div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Load per joist from its tributary width</b></div>
+<p class="why"><b>Decision:</b> each joist carries the floor halfway to its neighbours on each side, i.e. a strip as wide as the spacing.</p>
+<div class="eq">\[ \begin{gathered}G = 0.5 \text{ kPa} \times 0.6 = 0.3 \text{ kN/m} \\[6pt] Q = 1.5 \text{ kPa} \times 0.6 = 0.9 \text{ kN/m}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Critical combination</b><span class="ref">Table 2.3</span></div>
+<p class="why"><b>Decision:</b> the tutorial treats the peak house floor load as short (about a day) and uses k₁ = 0.94 from the 5-day row (the nearest row that is still conservative).</p>
+<div class="eq">\[ \begin{gathered}\frac{1.35 \times 0.3}{0.57} = 0.71 \\[6pt] \begin{aligned}\boxed{\frac{1.2 \times 0.3 + 1.5 \times 0.9}{0.94} = \frac{1.71}{0.94} = 1.82} \ &\Rightarrow \ w^* \\ &= 1.71 \text{ kN/m}\end{aligned}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Factors</b><span class="ref">Tables 2.1, 2.7, Cl 3.2.3</span></div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th>Value</th><th class="l">Decision</th></tr>
+<tr><td>φ</td><td>0.90</td><td class="l">Joist in a house; one joist fails → 0.6 × 3.1 = 1.86 m² &lt; 25 m² → Cat 1; MGP12 → 0.90</td></tr>
+<tr><td>k₄, k₆</td><td>1.0</td><td class="l">Seasoned, indoors, Melbourne</td></tr>
+<tr><td>k₉</td><td>1.12</td><td class="l">3 joists share through the flooring: \(1.0 + (1.2 - 1.0)(1 - \tfrac{2 \times 0.6}{3}) = 1.12\)</td></tr>
+<tr><td>k₁₂</td><td>1.0</td><td class="l">Flooring nailed along the top (compression) edge → continuously restrained</td></tr>
+<tr><td>f′<sub>b</sub></td><td>28 MPa</td><td class="l">MGP12, depth ≤ 140 (H3.1)</td></tr>
+</table></div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Bending check (45 × 120 from the deflection check)</b></div>
+<div class="eq">\[ \begin{gathered}Z = \frac{45 \times 120^2}{6} = 108\,000 \\[6pt] \begin{aligned}M_d &= 0.9 \times 0.94 \times 1 \times 1 \times 1.12 \times 1 \times 28 \times 108\,000 = 2.78 \text{ kNm} \ \\ &\ge \ M^* = \frac{1.71 \times 3^2}{8} = 1.92 \text{ kNm}\end{aligned}\end{gathered} \]</div>
+<div class="out">PASS (69% utilised)</div></div>
+</div>
+</div></details>
+
+<!-- ================= 6 · DEFLECTION ================= -->
+<details class="mod"><summary><span class="ttl"><h3>6 · Deflection (serviceability)</h3><span>Q5.3 Part 1 · Q5.6 · 2025 Problem 1</span></span></summary><div class="body">
+<div class="eq">\[ \begin{gathered}\delta = \frac{5\,\left(\sum j_2\, w_i\right) L^4}{384\, E\, I} \\[6pt] \Longleftrightarrow \\[6pt] I_\text{req} = \frac{5\,\left(\sum j_2\, w_i\right) L^4}{384\, E\, \delta_\text{limit}}\end{gathered} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Symbol</th><th class="l">Meaning</th><th class="l">How to choose it</th></tr>
+<tr><td>\(w_i\)</td><td class="l">each <b>unfactored</b> load part (kN/m = N/mm)</td><td class="l">G, ψ<sub>s</sub>Q (ψ<sub>s</sub> = 0.7) or ψ<sub>l</sub>Q (ψ<sub>l</sub> = 0.4)</td></tr>
+<tr><td>\(j_2\)</td><td class="l">creep factor, applied to each part separately</td><td class="l">short-term (≤ 1 day) 1.0; long-term (≥ 1 year) 2.0 for seasoned timber, up to 3.0 at MC ≥ 25% (Fig 2.1)</td></tr>
+<tr><td>\(E\)</td><td class="l">modulus of elasticity</td><td class="l">mean E normally; E<sub>0.05</sub> = 0.75 E<sub>mean</sub> when damage to something brittle is at stake (Table B1)</td></tr>
+<tr><td>\(\delta_\text{limit}\)</td><td class="l">allowed sag</td><td class="l">given by the question (span/250, span/300, a clearance) plus any pre-camber</td></tr>
+</table></div>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 210" role="img" aria-label="Cambered beam over a glass partition">
+<path d="M60,60 Q280,30 500,60" class="la" stroke-dasharray="6 4"/><text x="280" y="28" text-anchor="middle" font-size="11" class="ta">as built: camber up span/300 = 23.4 mm</text>
+<path d="M60,60 L500,60" class="lm"/>
+<path d="M60,60 Q280,110 500,60" class="lc"/><text x="280" y="100" text-anchor="middle" font-size="11" class="tc">allowed final sag</text>
+<path d="M60,60 l-10,14 h20 z" class="fs ln"/><path d="M500,60 l-10,14 h20 z" class="fs ln"/>
+<rect x="220" y="115" width="120" height="80" class="fs ln"/><text x="280" y="160" text-anchor="middle" font-size="11">glass partition</text>
+<line x1="350" y1="60" x2="350" y2="115" class="lm"/><text x="356" y="92" font-size="11">30 mm gap</text>
+<text x="420" y="160" font-size="11">δ_limit = 30 + 23.4 = 53.4</text>
+</svg></div>
+<p class="cap">The beam starts curved upward by the camber, so it can sag that much just to reach flat, plus the 30 mm gap above the glass.</p>
+
+<h3>Worked example · Q5.3 Part 1 GL12 beam over a glass partition</h3>
+<div class="given"><b>Given:</b> L = 7010 mm · G = 1.5, Q = 6 kN/m · GL12, E<sub>mean</sub> = 11 500 MPa (Table 7.1) · camber span/300 · 30 mm clearance · vibration limit span/250</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Pick the two SLS combinations</b><span class="ref">HB108 p.144–145, AS/NZS 1170.0 Table 4.1</span></div>
+<p class="why"><b>Decision:</b> each architect's limit matches one combination. Vibration is felt when live load comes and goes → short-term ψ<sub>s</sub>Q alone. The glass is crushed by the long-term sag → G + ψ<sub>l</sub>Q.</p>
+<div class="eq">\[ \begin{gathered}\text{Case 1: } \psi_s Q = 0.7 \times 6 = 4.2 \text{ kN/m} \\[6pt] \text{Case 2: } G + \psi_l Q = 1.5 + 0.4 \times 6 = 1.5 + 2.4 \text{ kN/m}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Apply j₂ to each part</b><span class="ref">Table 2.4, Fig 2.1</span></div>
+<div class="eq">\[ \begin{gathered}\text{Case 1: } \sum j_2 w = 1.0 \times 4.2 = 4.2 \\[6pt] \text{Case 2: } \sum j_2 w = 2.0 \times 1.5 + 2.0 \times 2.4 = 7.8 \text{ kN/m}\end{gathered} \]</div>
+<p class="why"><b>Why j₂ = 2 for both parts of case 2:</b> both G and ψ<sub>l</sub>Q stay on for years, and the glulam is seasoned (MC ≤ 15%) → j₂ = 2.0.</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Limits and E for each case</b></div>
+<div class="eq">\[ \begin{gathered}\delta_1 = \frac{7010}{250} = 28.04 \text{ mm},\ E = 11\,500 \\[6pt] \begin{aligned}\delta_2 &= 30 + \frac{7010}{300} = 53.4 \text{ mm},\ E_{0.05} \\ &= 0.75 \times 11\,500 = 8\,625 \text{ MPa}\end{aligned}\end{gathered} \]</div>
+<p class="why"><b>Why E<sub>0.05</sub> for case 2:</b> cracking the glass is a costly, irreversible failure, so use a low (5th percentile) stiffness to be safe. Vibration is only discomfort, so mean E is fine.</p></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Required I for each case</b></div>
+<div class="eq">\[ \begin{aligned}
+I_1 &amp;= \frac{5 \times 4.2 \times 7010^4}{384 \times 11\,500 \times 28.04} = 410 \times 10^6 \text{ mm}^4\\
+I_2 &amp;= \frac{5 \times 7.8 \times 7010^4}{384 \times 8\,625 \times 53.4} = 532 \times 10^6 \text{ mm}^4 \ \leftarrow \text{governs}
+\end{aligned} \]</div>
+<p class="cap">Your tutorial shows 419 and 545 × 10⁶ (about 2% higher, from rounding or a slightly longer span). The governing case and the section chosen are the same.</p></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Select a section</b><span class="ref">HB108 section tables</span></div>
+<div class="out">GL12 395 × 115, I = 558 × 10⁶ mm⁴ (tutorial's table value) ≥ required → PASS. Then the strength check (Lesson 5) upsizes it to 495 × 115</div></div>
+</div>
+
+<h3>Worked example · Q5.6 Joist depth from deflection</h3>
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Solve for d directly</b></div>
+<p class="why"><b>Decision:</b> width b = 45 is known, so put I = bd³/12 into the formula and solve for d. Load: ψ<sub>s</sub>Q = 0.7 × 0.9 = 0.63 kN/m, j₂ = 1, limit 3000/300 = 10 mm, E = 12 700 MPa (MGP12).</p>
+<div class="eq">\[ \begin{aligned}d &= \sqrt[3]{\frac{12 \times 5\, j_2\, w\, L^4}{384\, E\, b\, \delta_\text{lim}}} \\ &= \sqrt[3]{\frac{12 \times 5 \times 1.0 \times 0.63 \times 3000^4}{384 \times 12\,700 \times 45 \times 10}} \\ &= 111.7 \text{ mm} \ \Rightarrow \ 45 \times 120\end{aligned} \]</div></div>
+
+<h3>Your turn · 2025 Problem 1 (glulam bearer, Hyne Beam 15, E = 15 500, L = 4000)</h3>
+<details class="try"><summary>Show the answer</summary>
+<div class="eq">\[ \text{(1) } I_\text{req} = \frac{5 \times 1.0 \times 7.0 \times 4000^4}{384 \times 15\,500 \times 16} = 94.1 \times 10^6 \Rightarrow 65 \times 260\ (I = 95.2 \times 10^6) \]</div>
+<div class="eq">\[ \begin{aligned}
+\text{(2a) } I_{460} &amp;= \tfrac{65 \times 460^3}{12} = 527.2 \times 10^6 &amp;&amp;\\
+G + \psi_s Q_S:\ &amp; \sum j_2 w = 2(7.0) + 1(0.7 \times 10) = 21.0 &amp;\Rightarrow\ \delta &amp;= 8.6 \text{ mm} \le 15\\
+G + \psi_l Q_L:\ &amp; \sum j_2 w = 2(7.0) + 2(0.4 \times 4) = 17.2 &amp;\Rightarrow\ \delta &amp;= 7.0 \text{ mm} \le 15
+\end{aligned} \]</div></details>
+</div></details>
+
+<!-- ================= 7 · COMBINED ================= -->
+<details class="mod"><summary><span class="ttl"><h3>7 · Combined bending and axial force</h3><span>Q6.1 MGP12 truss chord, two load cases</span></span></summary><div class="body">
+<p>A truss chord carries bending and an axial force together. Each failure mode uses up a fraction of the capacity; the fractions together must stay at or below 1.</p>
+<div class="eq">\[ \begin{aligned}
+\textbf{(C1)}\quad &amp; \left(\frac{M_x^*}{M_{d,x}}\right)^2 + \frac{N_c^*}{N_{d,cy}} \le 1 &amp;\qquad \textbf{(C2)}\quad &amp; \frac{M_x^*}{M_{d,x}} + \frac{N_c^*}{N_{d,cx}} \le 1\\[6pt]
+\textbf{(T1)}\quad &amp; \frac{M_x^*}{M_{d,x}} + \frac{N_t^*}{N_{d,t}} \le 1 &amp;\qquad \textbf{(T2)}\quad &amp; \frac{M_x^*}{M_{d,x}} - \frac{Z}{A}\,\frac{N_t^*}{M_{d,x}} \le 1
+\end{aligned} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Check</th><th class="l">Applies to</th><th class="l">What it guards against</th><th class="l">Which capacities</th></tr>
+<tr><td>C1</td><td class="l">bending + compression (Cl 3.5.1)</td><td class="l">sideways (minor-axis) buckling while bending</td><td class="l">N<sub>d,cy</sub> uses the minor-axis k₁₂</td></tr>
+<tr><td>C2</td><td class="l">bending + compression</td><td class="l">in-plane (major-axis) failure</td><td class="l">N<sub>d,cx</sub> uses the major-axis k₁₂</td></tr>
+<tr><td>T1</td><td class="l">bending + tension (Cl 3.5.2)</td><td class="l">over-stress of the tension face</td><td class="l">M<sub>d</sub> with k₁₂ = 1 (tension straightens it)</td></tr>
+<tr><td>T2</td><td class="l">bending + tension</td><td class="l">buckling of the compression face (tension only partly cancels it)</td><td class="l">M<sub>d</sub> with the real k₁₂</td></tr>
+</table></div>
+<div class="given"><b>Given (Q6.1):</b> MGP12 140 × 45, L = 2.4 m, nail-plated ends, one minor-axis restraint at mid-span, g₁₃ = 1, Mt Gambier, primary roof truss.<br>Case I: G + wind uplift → M* = 1.05 kNm, N*<sub>t</sub> = 13 kN. Case II: G + long-term imposed → M* = 1.15 kNm, N*<sub>c</sub> = 6 kN.</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Factors common to both cases</b><span class="ref">Tables 2.1, G1, H3.1</span></div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th>Case I</th><th>Case II</th><th class="l">Decision</th></tr>
+<tr><td>φ</td><td>0.70</td><td>0.70</td><td class="l">Primary member, not a house → Cat 2; MGP12 → 0.70</td></tr>
+<tr><td>k₁</td><td>1.00</td><td>0.57</td><td class="l">Wind = 5 s; long-term imposed = 50+ years</td></tr>
+<tr><td>k₄, k₆, k₉</td><td>1.0</td><td>1.0</td><td class="l">Seasoned; South Australia; a single chord doesn't share</td></tr>
+<tr><td>f′ (MPa)</td><td colspan="2">f′<sub>b</sub> 28 · f′<sub>t</sub> 12 · f′<sub>c</sub> 24</td><td class="l">MGP12, depth ≤ 140 (H3.1)</td></tr>
+</table></div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Bending capacity M<sub>d,x</sub></b><span class="ref">Cl 3.2.3.2, Table 3.1</span></div>
+<div class="eq">\[ \begin{gathered}S_1 = 1.25 \times \frac{140}{45}\left(\frac{1200}{140}\right)^{0.5} = 11.39 \\[6pt] \rho_b S_1 = 0.85 \times 11.39 = 9.68 \le 10 \Rightarrow k_{12} = 1 \\[6pt] Z = \frac{45 \times 140^2}{6} = 147 \times 10^3\end{gathered} \]</div>
+<div class="eq">\[ \begin{gathered}M_{d,x}^{I} = 0.7 \times 1.0 \times 28 \times 147 \times 10^3 = 2.88 \text{ kNm} \\[6pt] M_{d,x}^{II} = 0.7 \times 0.57 \times 28 \times 147 \times 10^3 = 1.64 \text{ kNm}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Case I tension capacity</b></div>
+<p class="why"><b>Decision:</b> nail plates don't drill holes, so the net area is the gross area.</p>
+<div class="eq">\[ N_{d,t} = 0.7 \times 1.0 \times 1 \times 1 \times 12 \times (140 \times 45) = 52.9 \text{ kN} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Case II compression capacity, both axes</b><span class="ref">Table 3.3: ρ<sub>c</sub> = 0.98</span></div>
+<div class="eq">\[ \begin{aligned}
+\text{Major: } S_3 &amp;= \frac{2400}{140} = 17.14,\quad \rho_c S_3 = 0.98 \times 17.14 = 16.8 \ \text{(between 10 and 20)}\\
+k_{12} &amp;= 1.5 - 0.05 \times 16.8 = 0.66\\
+N_{d,cx} &amp;= 0.7 \times 0.57 \times 0.66 \times 24 \times 6300 = 39.8 \text{ kN}\\[8pt]
+\text{Minor: } S_4 &amp;= \frac{1200}{45} = 26.67,\quad \rho_c S_4 = 0.98 \times 26.67 = 26.1 \gt 20\\
+k_{12} &amp;= \frac{200}{26.1^2} = 0.29\\
+N_{d,cy} &amp;= 0.7 \times 0.57 \times 0.29 \times 24 \times 6300 = 17.5 \text{ kN}
+\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Case I interaction: checks T1 and T2</b></div>
+<div class="eq">\[ \begin{gathered}\frac{1.05}{2.88} + \frac{13}{52.9} = 0.365 + 0.246 = 0.61 \le 1 \\[6pt] \begin{aligned}\frac{1.05}{2.88} - \frac{Z}{A}\cdot\frac{N_t^*}{M_d} &= 0.365 - \frac{23.3 \times 13\,000}{2.88 \times 10^6} \\ &= 0.365 - 0.105 = 0.26 \le 1\end{aligned}\end{gathered} \]</div>
+<p class="cap">First line: check T1. Second line: check T2, with Z/A = 147 000 / 6 300 = 23.3 mm. The minus sign: axial tension partly cancels the bending compression on the top face, so buckling of that face becomes less likely.</p></div>
+<div class="stp"><div class="sh"><span class="sn">6</span><b>Case II interaction: checks C1 and C2</b></div>
+<div class="eq">\[ \begin{gathered}\left(\frac{1.15}{1.64}\right)^2 + \frac{6}{17.5} = 0.49 + 0.34 = 0.84 \le 1 \\[6pt] \frac{1.15}{1.64} + \frac{6}{39.8} = 0.70 + 0.15 = 0.85 \le 1\end{gathered} \]</div>
+<div class="out">PASS in both cases. Case II is the closer one (85%)</div></div>
+</div>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 260" role="img" aria-label="Interaction diagram for Q6.1 case II">
+<line x1="60" y1="220" x2="300" y2="220" class="ln"/><line x1="60" y1="220" x2="60" y2="20" class="ln"/>
+<text x="180" y="248" text-anchor="middle" font-size="11">N*/N_d</text><text x="22" y="120" font-size="11" transform="rotate(-90 22 120)" text-anchor="middle">M*/M_d</text>
+<text x="60" y="236" text-anchor="middle" font-size="10" class="tm">0</text><text x="260" y="236" text-anchor="middle" font-size="10" class="tm">1</text><text x="50" y="24" text-anchor="end" font-size="10" class="tm">1</text>
+<path d="M60,20 L260,220" class="la"/>
+<polyline points="260,220 258,200 252,180 242,160 228,140 210,120 188,100 162,80 132,60 98,40 60,20" class="lc"/>
+<circle cx="90" cy="80" r="5" class="fa"/><text x="66" y="66" font-size="11" class="ta">C2: (0.15, 0.70)</text>
+<circle cx="129" cy="80" r="5" class="fc"/><text x="134" y="102" font-size="11" class="tc">C1: (0.34, 0.70)</text>
+<text x="330" y="60" font-size="11" class="ta">— linear: M/M_d + N/N_d,cx = 1</text>
+<text x="330" y="80" font-size="11" class="tc">— curved: (M/M_d)² + N/N_d,cy = 1</text>
+<text x="330" y="110" font-size="11">Inside the line/curve = safe.</text>
+<text x="330" y="128" font-size="11">Both points sit inside → PASS.</text>
+</svg></div>
+</div></details>
+
+<!-- ================= 8 · NAILED AND SCREWED JOINTS ================= -->
+<details class="mod"><summary><span class="ttl"><h3>8 · Nailed and screwed joints</h3><span>Q7.1 tie-down strap · Type 2 screws (Part B every year)</span></span></summary><div class="body">
+<h3>First two decisions for every joint</h3>
+<div class="tree">
+<div class="q">Is the fastener pushed <b>sideways</b> (shear) or <b>pulled out</b> along its axis?</div>
+<div class="a yes">Sideways → <b>Type 1</b>: uses k₁, k₁₃, k₁₄, k₁₆, k₁₇</div>
+<div class="a">Pulled out → <b>Type 2</b> (withdrawal): <b>no k₁</b>; uses k₁₃ and penetration length ℓ<sub>p</sub></div>
+<div class="q">Is the point in <b>side grain</b> (face of a board) or <b>end grain</b> (sawn end)?</div>
+<div class="a yes">Side grain → k₁₃ = 1.0</div>
+<div class="a">End grain → k₁₃ = 0.6 (Type 1 nails/screws, Type 2 screws or skew nails), 0.25 (straight nails in withdrawal)</div>
+</div>
+<div class="eq">\[ \text{Type 1 nails (Eq 4.2(2)):}\quad N_{d,j} = \phi\, k_1\, k_{13}\, k_{14}\, k_{16}\, k_{17}\, n\, Q_k \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th class="l">Question it answers</th><th class="l">Values</th></tr>
+<tr><td>φ</td><td class="l">category, fastener type</td><td class="l">Table 2.2: nails 0.85 / 0.80 / 0.75</td></tr>
+<tr><td>k₁</td><td class="l">load duration, <b>joints</b> column</td><td class="l">Table 2.3: wind 1.14, permanent 0.57</td></tr>
+<tr><td>k₁₃</td><td class="l">side or end grain?</td><td class="l">1.0 / 0.6</td></tr>
+<tr><td>k₁₄</td><td class="l">how many shear planes?</td><td class="l">single 1.0 / double 2.0</td></tr>
+<tr><td>k₁₆</td><td class="l">side plates?</td><td class="l">1.2 nails through close-fitting holes in steel plates, 1.1 plywood gussets, else 1.0</td></tr>
+<tr><td>k₁₇</td><td class="l">how many nails in a row?</td><td class="l">Table 4.3</td></tr>
+<tr><td>Q<sub>k</sub></td><td class="l">capacity of one nail</td><td class="l">Table 4.1(B) seasoned by joint group and diameter</td></tr>
+</table></div>
+
+<h3>Worked example · Q7.1 Strap tying a secondary truss to the wall (Port Douglas, wind uplift)</h3>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 250" role="img" aria-label="Nailed strap connecting truss bottom chord to wall frame">
+<defs><marker id="arU" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,10 L10,10 L5,0 z" class="fa"/></marker></defs>
+<rect x="40" y="60" width="260" height="40" class="fw"/><g class="lm"><line x1="50" y1="72" x2="290" y2="72"/><line x1="50" y1="88" x2="290" y2="88"/></g>
+<text x="170" y="54" text-anchor="middle" font-size="11">truss bottom chord (grain horizontal)</text>
+<rect x="130" y="100" width="40" height="130" class="fw"/><g class="lm"><line x1="142" y1="110" x2="142" y2="225"/><line x1="158" y1="110" x2="158" y2="225"/></g>
+<text x="180" y="200" font-size="11">wall stud (grain vertical)</text>
+<rect x="138" y="66" width="24" height="120" class="fs ln"/>
+<circle cx="145" cy="76" r="2.5" class="fi"/><circle cx="155" cy="76" r="2.5" class="fi"/><circle cx="145" cy="90" r="2.5" class="fi"/><circle cx="155" cy="90" r="2.5" class="fi"/>
+<circle cx="145" cy="150" r="2.5" class="fi"/><circle cx="155" cy="150" r="2.5" class="fi"/><circle cx="145" cy="164" r="2.5" class="fi"/><circle cx="155" cy="164" r="2.5" class="fi"/>
+<line x1="230" y1="40" x2="230" y2="10" class="la" marker-end="url(#arU)"/><text x="238" y="22" font-size="11" class="ta">wind uplift</text>
+<text x="330" y="80" font-size="11">Chord: uplift pushes nails ⊥ grain</text>
+<text x="330" y="160" font-size="11">Stud: uplift pushes nails ∥ grain</text>
+<text x="330" y="190" font-size="11" class="tm">4 nails (2 × 2) each side, single shear</text>
+</svg></div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Classify the joint</b><span class="ref">Cl 4.1.3</span></div>
+<p class="why"><b>Decision:</b> uplift slides the strap along the timber face, bending the nails sideways → <b>Type 1</b>. The nails go into the board faces → <b>side grain</b>.</p></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Each factor, one at a time</b></div>
+<div class="scroll"><table class="t">
+<tr><th>Factor</th><th>Value</th><th class="l">Decision</th></tr>
+<tr><td>φ</td><td>0.85</td><td class="l">Secondary truss → Cat 1; nails → 0.85 (Table 2.2)</td></tr>
+<tr><td>k₁</td><td>1.14</td><td class="l">Wind gust = 5 seconds, <b>joints</b> column of Table 2.3</td></tr>
+<tr><td>k₁₃</td><td>1.0</td><td class="l">Side grain</td></tr>
+<tr><td>k₁₄</td><td>1.0</td><td class="l">One shear plane (strap to timber)</td></tr>
+<tr><td>k₁₆</td><td>1.0</td><td class="l">The strap is too thin to stop the nail heads rotating</td></tr>
+<tr><td>k₁₇</td><td>1.0</td><td class="l">Seasoned, 2 nails per row (Table 4.3(A))</td></tr>
+<tr><td>n</td><td>4</td><td class="l">2 × 2 pattern each side</td></tr>
+<tr><td>Q<sub>k</sub></td><td>665 N</td><td class="l">MGP12 → joint group JD4 (H3.1); 2.8 mm nail (Table 4.1(B))</td></tr>
+</table></div>
+<p class="cap">k₆ for Port Douglas doesn't appear: it isn't in the nail formula.</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Capacity</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,j} &= 0.85 \times 1.14 \times 1.0 \times 1.0 \times 1.0 \times 1.0 \times 4 \times 665 = 2\,578 \text{ N} \\ &= 2.58 \text{ kN}\end{aligned} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Will the nails fit? Penetration and spacing</b><span class="ref">Cl 4.2.5, Table 4.4</span></div>
+<div class="eq">\[ t_p \ge 10D = 10 \times 2.8 = 28 \text{ mm} \qquad \text{width} \ge \underbrace{5D}_{\text{edge}} + \underbrace{10D}_{\text{across grain}} + \underbrace{5D}_{\text{edge}} = 20D = 56 \text{ mm} \Rightarrow \text{use 70 mm} \]</div>
+<p class="why"><b>Why it matters:</b> Q<sub>k</sub> assumes full penetration and enough wood around each nail to stop splitting. Less penetration reduces capacity proportionally (Cl 4.2.5).</p></div>
+</div>
+
+<h3>Type 2 screws (withdrawal): the Part B favourite</h3>
+<div class="eq">\[ \begin{gathered}N_{d,j} = \min\left(\phi\, k_{13}\, \ell_p\, n\, Q_k,\ \ n\, N_{d,ts}\right) \\[6pt] \text{(Cl 4.3.3.4, Eq 4.3(6), 4.3(7))}\end{gathered} \]</div>
+<div class="scroll"><table class="t">
+<tr><th>Parameter</th><th class="l">How it enters</th></tr>
+<tr><td>ℓ<sub>p</sub></td><td class="l">penetration into the supporting member: capacity ∝ ℓ<sub>p</sub></td></tr>
+<tr><td>Q<sub>k</sub></td><td class="l">per mm of penetration, Table 4.6: depends on <b>joint group</b> (timber density) and <b>screw gauge</b>. Seasoned JD4: No.8 56, No.10 66, No.12 75, No.14 85 N/mm</td></tr>
+<tr><td>k₁₃</td><td class="l">side grain 1.0, end grain 0.6</td></tr>
+<tr><td>n, N<sub>d,ts</sub></td><td class="l">number of screws; the screw's own tensile capacity caps it</td></tr>
+<tr><td>k₁</td><td class="l"><b>not used</b>: load duration doesn't reduce withdrawal (Table 2.3 note)</td></tr>
+</table></div>
+<div class="stp"><div class="sh"><span class="sn">✎</span><b>Practice example (not from a tutorial)</b></div>
+<p class="why">4 No.12 screws, 50 mm into the side grain of seasoned JD4 timber, Category 1:</p>
+<div class="eq">\[ \begin{aligned}N_{d,j} &= 0.85 \times 1.0 \times 50 \times 4 \times 75 = 12\,750 \text{ N} \\ &= 12.8 \text{ kN} \quad (\text{then check against } 4 N_{d,ts})\end{aligned} \]</div></div>
+</div></details>
+
+<!-- ================= 9 · BOLTED JOINTS ================= -->
+<details class="mod"><summary><span class="ttl"><h3>9 · Bolted joints</h3><span>Q7.2 three-member joint, M12 bolt, J2 unseasoned</span></span></summary><div class="body">
+<div class="eq">\[ \begin{gathered}N_{d,j} = \phi\, k_1\, k_{16}\, k_{17}\, n\, Q_{sk} \\[6pt] \text{(Cl 4.4.3)}\end{gathered} \]</div>
+<p>The key decision for bolts is the <b>grain direction in each member</b>. Parallel to grain → Table 4.9. Perpendicular to grain → Table 4.10 (much weaker). Each table has three parts:</p>
+<div class="scroll"><table class="t">
+<tr><th>Part</th><th class="l">Gives you</th></tr>
+<tr><td>(A)</td><td class="l">the joint layout → effective thickness b<sub>eff</sub> and the system capacity rule (e.g. Q<sub>sk</sub> = 2Q<sub>kl</sub>)</td></tr>
+<tr><td>(B)</td><td class="l">Q<sub>k</sub> per bolt, <b>unseasoned</b> (joint groups J1–J6)</td></tr>
+<tr><td>(C)</td><td class="l">Q<sub>k</sub> per bolt, <b>seasoned</b> (joint groups JD1–JD6)</td></tr>
+</table></div>
+<div class="figbox"><svg class="fig n" viewBox="0 0 560 260" role="img" aria-label="Three-member bolted joint with grain directions">
+<defs><marker id="arD" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,0 L5,10 z" class="fa"/></marker><marker id="arUp" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,10 L10,10 L5,0 z" class="fa"/></marker></defs>
+<rect x="60" y="20" width="60" height="220" class="fw"/><g class="lm"><line x1="75" y1="25" x2="75" y2="235"/><line x1="105" y1="25" x2="105" y2="235"/></g>
+<text x="90" y="252" text-anchor="middle" font-size="11">① / ③ grain ↕</text>
+<rect x="120" y="95" width="230" height="75" class="fw"/><g class="lm"><line x1="125" y1="110" x2="345" y2="110"/><line x1="125" y1="155" x2="345" y2="155"/></g>
+<text x="240" y="186" text-anchor="middle" font-size="11">② beam, grain ↔, 38 thick, 150 deep</text>
+<circle cx="90" cy="117" r="6" class="fs ln"/><circle cx="90" cy="148" r="6" class="fs ln"/>
+<line x1="300" y1="70" x2="300" y2="92" class="la" marker-end="url(#arD)"/><text x="306" y="78" font-size="11" class="ta">5 kN</text>
+<line x1="40" y1="60" x2="40" y2="30" class="la" marker-end="url(#arUp)"/><text x="10" y="24" font-size="11" class="ta">2.5 kN × 2</text>
+<text x="380" y="40" font-size="11">Members ① ③: load ∥ grain</text><text x="380" y="56" font-size="11" class="tm">→ Table 4.9</text>
+<text x="380" y="90" font-size="11">Member ②: load ⊥ grain</text><text x="380" y="106" font-size="11" class="tm">→ Table 4.10 (weaker)</text>
+<text x="380" y="150" font-size="11">2 bolts across the 150 depth:</text><text x="380" y="166" font-size="11" class="tm">edge + spacing + edge ≤ 150</text>
+</svg></div>
+<div class="given"><b>Given (Q7.2):</b> outer members ① ③ 50 mm thick, centre beam ② 38 mm thick × 150 deep · M12 bolt · joint group J2, unseasoned · 5 kN permanent load in the beam, 2.5 kN into each outer member</div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>General factors</b><span class="ref">Tables 2.2, 2.3, Cl 4.1.3</span></div>
+<p class="why"><b>Decisions:</b> bolts loaded in shear → Type 1. Bolts ≤ M16 → φ = 0.8. Permanent load → k₁ = 0.57.</p></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Outer members ① ③, parallel to grain</b><span class="ref">Table 4.9(A), 4.9(B)</span></div>
+<p class="why"><b>Decision:</b> three-member joint, outer members 50 mm → b<sub>eff</sub> = 2t₁ = 100 mm, and the system capacity is two shear planes: Q<sub>sk</sub> = 2Q<sub>kl</sub>. Read Q<sub>kl</sub> from Table 4.9(B) (unseasoned), J2, M12, 100 mm = 11 100 N.</p>
+<div class="eq">\[ \begin{gathered}Q_{sk} = 2 \times 11.1 = 22.2 \text{ kN} \\[6pt] N_{d,j} = 0.8 \times 0.57 \times 1 \times 1 \times 1 \times 22.2 = 10.1 \text{ kN} \ge 5 \text{ kN}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Centre beam ②, perpendicular to grain</b><span class="ref">Table 4.10(A), 4.10(B)</span></div>
+<p class="why"><b>Decision:</b> for the perpendicular case the centre member's own thickness is effective: b<sub>eff</sub> = t₂ = 38 mm, Q<sub>sk</sub> = 2Q<sub>kp</sub>. Table 4.10(B), J2, M12, 38 mm → Q<sub>kp</sub> = 3 990 N.</p>
+<div class="eq">\[ Q_{sk} = 2 \times 3.99 = 7.98 \text{ kN} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>k₁₆ and k₁₇</b><span class="ref">Cl 4.4.3.2, Table 4.12</span></div>
+<p class="why"><b>Decisions:</b> no steel side plates → k₁₆ = 1.0. Unseasoned with fewer than 4 bolts in a row → k₁₇ = 1.0.</p></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Check the beam with one bolt, then two</b></div>
+<div class="eq">\[ \begin{gathered}n = 1:\ 0.8 \times 0.57 \times 1 \times 1 \times 1 \times 7.98 = 3.64 \text{ kN} \lt 5 \\[6pt] n = 2:\ 0.8 \times 0.57 \times 2 \times 7.98 = 7.28 \text{ kN} \ge 5\end{gathered} \]</div>
+<div class="out">One bolt FAILS (perpendicular to grain governs) → use 2 × M12</div></div>
+<div class="stp"><div class="sh"><span class="sn">6</span><b>Do two bolts fit in the 150 mm beam?</b><span class="ref">Cl 4.4.4.3, Fig 4.9(b)</span></div>
+<div class="eq">\[ \begin{gathered}2D + 4D + 2D = 8D = 8 \times 12 = 96 \text{ mm} \le 150 \\[6pt] \begin{aligned}\frac{b}{D} &= \frac{38}{12} = 3.17 \gt 2 \Rightarrow a \\ &\ge 2.5D \text{ (rising to } 5D \text{ at } b/D = 6)\end{aligned}\end{gathered} \]</div>
+<p class="why"><b>Why the a rule:</b> in a member loaded across the grain, bolts in a line can split it along one grain line. A thicker member (bigger b/D) needs the bolts further apart. Spacing used = 4D, more than the required ≈ 3.2D at b/D = 3.17.</p>
+<div class="out">PASS: 2 × M12 bolts</div></div>
+</div>
+<h3>Bolt spacing rules (Cl 4.4.4)</h3>
+<div class="scroll"><table class="t">
+<tr><th class="l">Load direction</th><th class="l">Rule</th></tr>
+<tr><td class="l">Parallel to grain</td><td class="l">5D along the row, 4D between rows, 2D edge; end distance 8D (tension, unseasoned), 7D (tension, seasoned), 5D (compression)</td></tr>
+<tr><td class="l">Perpendicular to grain</td><td class="l">5D along the grain, 4D to the loaded edge; rows a = 2.5D at b/D = 2, up to 5D at b/D ≥ 6</td></tr>
+</table></div>
+</div></details>
+
+<!-- ================= 10 · BONDED-IN RODS ================= -->
+<details class="mod"><summary><span class="ttl"><h3>10 · Bonded-in rods and brittle failure</h3><span>2025 Problem 3 (40 marks) · Part B every year</span></span></summary><div class="body">
+<p>The 2025 paper gave the rod equations in its appendix. What you need is the method: split the moment into tension and compression in the two rod sets, then check every failure mode and find the weakest.</p>
+<div class="figbox"><svg class="fig" viewBox="0 0 560 230" role="img" aria-label="Force couple on the two rod sets">
+ <rect x="140" y="40" width="280" height="150" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.2"/>
+ <line x1="173" y1="40" x2="173" y2="110" stroke="var(--ink)" stroke-width="3"/><line x1="387" y1="40" x2="387" y2="110" stroke="var(--ink)" stroke-width="3"/>
+ <text x="173" y="128" font-size="11" text-anchor="middle" fill="var(--ink)">set 1</text><text x="387" y="128" font-size="11" text-anchor="middle" fill="var(--ink)">set 2</text>
+ <line x1="173" y1="160" x2="387" y2="160" stroke="var(--muted)"/><text x="280" y="176" font-size="11" text-anchor="middle" fill="var(--muted)">z = 470 mm</text>
+ <path d="M173,36 V8" stroke="var(--crit)" stroke-width="2.2" fill="none"/><path d="M167,16 L173,6 L179,16 z" fill="var(--crit)"/>
+ <text x="60" y="18" font-size="12" fill="var(--crit)">10 + 10 = 20 kN</text><text x="60" y="34" font-size="11" fill="var(--muted)">(N*/2 + M*/z)</text>
+ <path d="M387,36 V8" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+ <text x="400" y="18" font-size="12" fill="var(--ink)">10 − 10 = 0 kN</text><text x="400" y="34" font-size="11" fill="var(--muted)">(N*/2 − M*/z)</text>
+ <text x="280" y="215" font-size="11" text-anchor="middle" fill="var(--muted)">Tension side depends on which way M* turns; mark it on your sketch</text></svg></div>
+<div class="ex">
+<div class="stp"><div class="sh"><span class="sn">1</span><b>Turn the moment into a force couple</b></div>
+<p class="why"><b>Decision:</b> two rod sets z = 470 mm apart resist the moment as a pair of equal and opposite forces. The direct tension N* is shared equally between the sets.</p>
+<div class="eq">\[ \begin{gathered}F_\text{couple} = \frac{M^*}{z} = \frac{4.7}{0.470} = 10 \text{ kN} \\[6pt] \begin{aligned}N_\text{per set} &= \frac{N^*}{2} \pm \frac{M^*}{z} = 10 \pm 10 \ \\ &\Rightarrow \ N_t^* = 20 \text{ kN},\ N_c^* = 0\end{aligned}\end{gathered} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">2</span><b>Factors</b></div>
+<p class="why"><b>Decisions:</b> wind = 5 s → k₁ = 1.00 for <b>timber</b> (wood tension) but 1.14 for the <b>joint</b> (pull-out, shear embedment): the appendix's Table C2 has both columns. Rods D ≤ 16, Cat 2 → φ = 0.80. LVL primary member → φ = 0.90. Brisbane → k₆ = 1. Seasoned → k₄ = 1.</p></div>
+<div class="stp"><div class="sh"><span class="sn">3</span><b>Steel yield: find the minimum rod size</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,\text{steel}} &= \phi\, n\, A_s\, f_y \ge N_t^* \Rightarrow A_s \\ &\ge \frac{20\,000}{0.8 \times 2 \times 240} = 52.1 \text{ mm}^2 \Rightarrow D \\ &\ge \sqrt{\frac{4 \times 52.1}{\pi}} = 8.1 \text{ mm}\end{aligned} \]</div>
+<p class="why"><b>Decision:</b> the pull-out formula is only valid for 12 ≤ D ≤ 24, so choose D = 12: \(A_s = \pi \times 12^2 / 4 = 113.1\).</p>
+<div class="eq">\[ N_{d,\text{steel}} = 0.8 \times 2 \times 113.1 \times 240 = 43.4 \text{ kN} \]</div></div>
+<div class="stp"><div class="sh"><span class="sn">4</span><b>Wood net tension around the rods</b></div>
+<div class="eq">\[ \begin{gathered}D_0 = 1.25 D = 15 \text{ mm} \\[6pt] A_w = 130 \times 250 - 2 \times \frac{\pi \times 15^2}{4} = 32\,150 \text{ mm}^2 \\[6pt] N_{d,\text{wood}} = 0.9 \times 1.0 \times 1 \times 1 \times 32\,150 \times 30 = 868 \text{ kN}\end{gathered} \]</div>
+<p class="cap">A_w assumed as the strip around one set: 2 × 65 mm wide (65 mm from rod to end) × 250 mm deep. State this assumption in the exam.</p></div>
+<div class="stp"><div class="sh"><span class="sn">5</span><b>Pull-out, L = 10D = 120 mm</b></div>
+<div class="eq">\[ \begin{aligned}Q_k &= 6.73\left(\frac{L}{D}\right)^{0.86}\left(\frac{D}{20}\right)^{1.62}\left(\frac{D_0}{D}\right)^{0.5}\left(\frac{e}{D}\right)^{0.5} \\ &= 6.73 \times 10^{0.86} \times 0.6^{1.62} \times 1.25^{0.5} \times 5.21^{0.5} \\ &= 54.4 \text{ kN}\end{aligned} \]</div>
+<div class="eq">\[ \begin{aligned}N_{d,\text{pullout}} &= \phi\, k_1 k_4 k_6\, n\, k_g\, Q_k \\ &= 0.8 \times 1.14 \times 1 \times 1 \times 2 \times 1.0 \times 54.4 = 99.2 \text{ kN}\end{aligned} \]</div>
+<p class="cap">e = 62.5 mm (distance from rod centre to the nearest face). k_g = 1.0 for 1–2 bars.</p></div>
+<div class="stp"><div class="sh"><span class="sn">6</span><b>Which failure mode governs?</b></div>
+<div class="eq">\[ \begin{aligned}N_{d,j} &= \min(43.4,\ 868,\ 99.2) \\ &= 43.4 \text{ kN (steel yield)} \ \ge \ 20 \text{ kN}\end{aligned} \]</div>
+<div class="out">Steel yield governs. That's desirable: steel yielding is ductile and gives warning, while wood tension and pull-out are brittle and sudden</div></div>
+<div class="stp"><div class="sh"><span class="sn">7</span><b>Shear (V* = 6 kN on all 4 rods)</b><span class="ref">AS1720.1 Table 4.10(C)</span></div>
+<div class="eq">\[ \begin{aligned}V_{d,\text{steel}} &= \frac{\phi\, n\, A_s f_y}{\sqrt{3}} \\ &= \frac{0.8 \times 4 \times 113.1 \times 240}{\sqrt{3}} = 50.1 \text{ kN}\end{aligned} \]</div>
+<div class="eq">\[ \begin{gathered}Q_{kp} = 8.83 \text{ kN (JD4, M12, } b_\text{eff} = 120) \\[6pt] V_{d,p} = 0.8 \times 1.14 \times 1 \times 1 \times 1.2 \times 4 \times 8.83 = 38.7 \text{ kN}\end{gathered} \]</div>
+<div class="out">V_d,j = min(50.1, 38.7) = 38.7 kN ≥ 6 kN → PASS</div></div>
+<div class="stp"><div class="sh"><span class="sn">8</span><b>Combined tension and shear</b></div>
+<div class="eq">\[ \begin{aligned}\frac{N_t^*}{N_{d,j}} + \frac{V^*}{V_{d,j}} &= \frac{20}{43.4} + \frac{6}{38.7} \\ &= 0.46 + 0.16 = 0.62 \le 1\end{aligned} \]</div>
+<div class="out">PASS</div></div>
+</div>
+<h3>Brittle failure: what to write in Part B</h3>
+<ul>
+<li><b>Modes:</b> splitting, row shear, block (group) tear-out, net tension, plug shear.</li>
+<li><b>Causes:</b> large stiff bolts that don't bend, tight spacing, short end distances, thick steel plates, fasteners on one grain line, shrinkage restrained by steel.</li>
+<li><b>Prevent:</b> larger end/edge distances and spacing along the grain; more, smaller fasteners that yield first; stagger fasteners; self-tapping screw reinforcement across the grain; seasoned timber or slotted holes; design so the steel yields first.</li>
+</ul>
+</div></details>
+
+<details class="mod"><summary><span class="ttl"><h3>11 · Wood as a material: moisture, anatomy, grading, EWPs</h3><span>Part A every year · Part B Q1</span></span></summary><div class="body">
+<h3>Moisture</h3>
+<ul>
+<li>MC = (m_wet − m_dry)/m_dry. It is on the <b>dry</b> mass, so MC can exceed 100%.</li>
+<li><b>Fibre saturation point</b> (~25–30%): cell walls full of bound water, no free water in the lumens. It can be found as the MC where shrinkage starts during drying.</li>
+<li>Shrinkage and swelling only happen <b>below</b> FSP. Tangential ≈ 2 × radial; longitudinal is negligible.</li>
+<li>EMC: the MC timber settles at in its environment. Seasoned = ≤ 15%, not 0%.</li>
+<li>Hardwoods can take years to air-dry; softwoods are routinely kiln dried. Wide boards move more than narrow ones. Restraining movement causes cracks.</li>
+</ul>
+<h3>Anatomy</h3>
+<ul>
+<li>Softwoods (conifers): sap moves in tracheids, no vessels. Hardwoods (broadleaf, deciduous/leafy): vessels. Balsa is a hardwood.</li>
+<li>From the centre: pith → heartwood → sapwood → cambium → bark. Directions: longitudinal, radial, tangential. Timber is orthotropic.</li>
+<li>Wood dry weight is about 50% carbon. Decomposition or combustion releases it.</li>
+</ul>
+<h3>Grading</h3>
+<ul>
+<li>Small clears are defect-free specimens and stronger than structural timber. Knots, slope of grain, checks, wane, pith and size effect make sawn boards weaker.</li>
+<li>Visual grading checks knots, grain angle, pith, wane, checks, gum veins. Not microfibril angle.</li>
+<li>F-grades: hardwood and softwood. MGP: machine graded pine; the number ≈ E in GPa, not MoR. A-grades (A17): reliability-tested seasoned hardwood. GL: glulam.</li>
+<li>Appearance grade ≠ stress grade. With several grade stamps, you may choose which one to use.</li>
+<li>Bending strength (MoR) is not a true material property; it was introduced to simplify beam calculations.</li>
+</ul>
+<h3>Engineered wood products</h3>
+<div class="scroll"><table class="t">
+<tr><th class="l">Product</th><th class="l">Made of</th><th class="l">Used for</th><th class="l">In AS1720.1?</th></tr>
+<tr><td class="l">Glulam</td><td class="l">Sawn laminations glued parallel</td><td class="l">Beams, columns</td><td class="l">Yes</td></tr>
+<tr><td class="l">LVL</td><td class="l">Veneers glued parallel</td><td class="l">Beams, columns</td><td class="l">Yes</td></tr>
+<tr><td class="l">Plywood</td><td class="l">Veneers cross-laminated</td><td class="l">Sheathing, bracing</td><td class="l">Yes</td></tr>
+<tr><td class="l">CLT</td><td class="l">Sawn boards cross-laminated, strong layers outside</td><td class="l">Walls, floors, roofs (not bridge decks)</td><td class="l"><b>No</b></td></tr>
+<tr><td class="l">SLT</td><td class="l">Boards clamped by prestressing rods (⊥ grain)</td><td class="l">Bridge decks, needs membrane</td><td class="l">No</td></tr>
+</table></div>
+<p>LVL is more reliable than sawn timber because defects are dispersed across many thin veneers, so strength varies less. AS1720.1 rewards this with a higher φ.</p>
+<p><b>Not in AS1720.1:</b> CLT, inclined or long self-tapping screws, glued-in rods, bolted or nailed moment connections, brittle failure modes in bolted joints. Rules from overseas standards must be adopted with care, because AS1720.1 values were derived experimentally and may not combine with other empirical rules.</p></div></details>
+<details class="mod"><summary><span class="ttl"><h3>12 · Durability, fire and bridges</h3><span>Part A every year · Part B photo questions</span></span></summary><div class="body">
+<h3>Decay fungi</h3>
+<p>Need four things: moisture (MC &gt; ~20%), oxygen, a suitable temperature, and food. Remove one and there's no decay. Submerged timber rarely rots (no oxygen). Hardwoods do decay.</p>
+<h3>Termites</h3>
+<ul>
+<li>Subterranean termites travel from the ground and don't need the timber to touch soil.</li>
+<li>Defences: naturally resistant species (cypress), preservative treatment, physical barriers (mesh, ant caps, graded stone), chemical soil barriers, raised floors with inspection zones.</li>
+<li>Paint doesn't stop termites. Thermal modification improves fungal resistance, not termite resistance.</li>
+</ul>
+<h3>Treatment</h3>
+<ul>
+<li>Match the treatment to the hazard class: H1 inside dry, H2 inside with termites, H3 outside above ground, H4–H5 in ground, H6 marine.</li>
+<li>Sapwood is not durable but treats well. Hardwood heartwood resists treatment. Softwood heartwood also treats poorly.</li>
+<li>Cut, drill and notch <b>before</b> pressure treatment, or you expose the untreated core (AS5100.9).</li>
+<li>CCA and ACQ corrode fasteners. In-situ pole treatment: solid diffusible preservative rods.</li>
+</ul>
+<h3>Photo questions: what to say</h3>
+<ul>
+<li><b>Problems:</b> exposed end grain, water traps (flat tops, bolts, plates), contact with concrete or ground, no roof protection, wet–dry cycling cracks.</li>
+<li><b>Fixes:</b> cap or flash end grain, extend the roof overhang, stand posts on a steel stirrup 75–150 mm clear, slope tops, gaps to dry, durable or treated species.</li>
+<li><b>Decks:</b> fewer face fixings (or hidden fixings) mean fewer holes for water to enter.</li>
+</ul>
+<h3>Fire</h3>
+<ul>
+<li>Timber does burn: heat drives off gases that ignite. The char layer insulates the wood below.</li>
+<li>Char depth grows with time; charring rate depends on density.</li>
+<li>Effective section = original − char depth − zero-strength layer (heated wood with no strength).</li>
+<li>Heat transfer: conduction, convection, radiation. Combustion is not one.</li>
+<li>CLT self-extinction needs no char fall-off or delamination (heat-resistant adhesive) and limited exposed timber area.</li>
+</ul>
+<h3>Bridges (AS5100.9)</h3>
+<p>Unseasoned timber is not permitted. Load factor 1.25G (or 1.35G alone). Traffic counts as 5 months → k1 = 0.8. SLT, TCC and durable hardwood boards are common decks.</p></div></details>
+
+</div>
+
+</section>
+
+<!-- ============ FACTORS ============ -->
+<section class="view" id="v-factors" hidden>
+  <div class="card">
+    <div class="eyebrow">Your one-page reference</div>
+    <h2>Every equation and factor</h2>
+    <p>Open book, so you don't memorise this. Print it and keep it on top of your standard. Every value here has been checked against AS1720.1-2010.</p>
+    <h3>The master equation</h3>
+    <div class="f">Design capacity = φ × k1 × k4 × k6 × (k7, k9, k12 as relevant) × f' × section ≥ design action
+Critical load combo = largest N*/k1  (never the largest N* alone)
+Use THAT combo's N* with THAT combo's k1</div>
+    <h3>Load combinations (AS/NZS 1170.0)</h3>
+    <div class="f">1.35G                       k1 = 0.57   permanent only
+1.2G + 1.5ψl Q   (ψl = 0.4)  k1 = 0.57   long-term part of live load
+1.2G + 1.5Q                 k1 = 0.80   floor live (5 months) / 0.94 crowd (5 days)
+0.9G + Wu                   k1 = 1.00   member  |  1.14 joint
+Bridges (AS5100): 1.35G  and  1.25G + 1.5Q (pedestrian) / 1.8Q (road), traffic = 5 months → 0.8</div>
+    <h3>k1 load duration (Table 2.3)</h3>
+    <div class="scroll"><table class="t">
+      <tr><th class="l">Shortest load in combo</th><th>Members</th><th>Joints</th></tr>
+      <tr><td class="l">50+ years (permanent)</td><td>0.57</td><td>0.57</td></tr>
+      <tr><td class="l">5 months (floor live, snow, traffic)</td><td>0.80</td><td>0.69</td></tr>
+      <tr><td class="l">5 days (crowd)</td><td>0.94</td><td>0.77</td></tr>
+      <tr><td class="l">5 hours</td><td>0.97</td><td>0.86</td></tr>
+      <tr><td class="l">5 minutes</td><td>1.00</td><td>1.00</td></tr>
+      <tr><td class="l">5 seconds (wind, earthquake)</td><td>1.00</td><td>1.14</td></tr>
+    </table></div>
+    <p class="cap">The joint column is from the 2025 paper's Table C2 and matches Q7.1 (nails, wind → 1.14). Q7.2 (bolts, permanent) used 0.57.</p>
+    <h3>φ capacity factor (Tables 2.1, 2.2)</h3>
+    <p class="cap">Cat 1 = house element, failure affects &lt; 25 m², or secondary member. Cat 2 = primary member in a non-house, or house &gt; 25 m². Cat 3 = post-disaster / essential services.</p>
+    <div class="scroll"><table class="t">
+      <tr><th class="l">Material / fastener</th><th>Cat 1</th><th>Cat 2</th><th>Cat 3</th><th class="l">Seen in</th></tr>
+      <tr><td class="l">Sawn F17+, A17, MGP15</td><td>0.95</td><td>0.85</td><td>0.75</td><td class="l">Q3.2 A17, Q4.4 F17 (Cat 2 → 0.85)</td></tr>
+      <tr><td class="l">Sawn &lt; F17, MGP10, MGP12</td><td>0.90</td><td>0.70</td><td>0.60</td><td class="l">Q5.6 (0.9), Q6.1 (0.7), Q3.1 (0.6)</td></tr>
+      <tr><td class="l">Glulam</td><td>0.95</td><td>0.85</td><td>0.75</td><td class="l">Q5.3 (0.85)</td></tr>
+      <tr><td class="l">Structural plywood</td><td>0.95</td><td>0.85</td><td>0.75</td><td class="l"></td></tr>
+      <tr><td class="l">LVL</td><td>0.95</td><td>0.90</td><td>0.80</td><td class="l">2025 P3</td></tr>
+      <tr><td class="l">Round timber</td><td>0.90</td><td>0.70</td><td>0.60</td><td class="l"></td></tr>
+      <tr><td class="l">Nails, screws, bolts ≤ M16</td><td>0.85</td><td>0.80</td><td>0.75</td><td class="l">Q7.1 (0.85), Q7.2 (0.8)</td></tr>
+      <tr><td class="l">Bolts &gt; M16</td><td>0.75</td><td>0.65</td><td>0.60</td><td class="l">2025 Table C1 pattern</td></tr>
+    </table></div>
+    <h3>Other k factors</h3>
+    <div class="f">k4  moisture:  seasoned, EMC ≤ 15% → 1.0
+                seasoned at EMC &gt; 15% → greater of 1 − 0.3(EMC − 15)/10 and 0.7
+                unseasoned → 1.0; if it partly seasons before full load, Table 2.5:
+                ≤38 mm 1.15, 50 1.10, 75 1.05, ≥100 1.00 (Q3.1)
+k6  temperature: 0.9 coastal Qld north of 25°S (Townsville, Cairns), else 1.0
+                Brisbane, Adelaide, Ballarat, Mt Gambier, Melbourne → 1.0
+k7  bearing length (Table 2.6): 12 → 1.75, 25 → 1.40, 50 → 1.20, 75 → 1.15, 125 → 1.10, ≥150 → 1.00
+k9  strength sharing (bending only): k9 = g31 + (g32 − g31)(1 − 2s/L) ≥ 1
+                Q5.6: g31 = 1.0, g32 = 1.2, s = 0.6, L = 3 → 1.12
+                truss chords, single members → 1.0; not used for plywood, glulam, LVL</div>
+    <h3>k12 stability</h3>
+    <div class="f">ρS ≤ 10        → k12 = 1.0
+10 &lt; ρS ≤ 20  → k12 = 1.5 − 0.05 ρS
+ρS &gt; 20       → k12 = 200 / (ρS)²
+
+Beam:    S1 = 1.25 (d/b)(Lay/d)^0.5     continuous restraint on compression edge → S1 = 0
+Column:  S3 = g13 L / d  (major)        S4 = Lay / b  (minor, discrete restraint)
+g13 (Table 3.2): flat ends / both fixed 0.7, two bolts each end 0.75, fixed + pinned 0.85,
+     studs in light framing 0.9, pinned–pinned 1.0, fixed + partly restrained 1.5, cantilever 2.0
+
+Seasoned (Appendix E), r = temporary / total action (0.25 if unknown or permanent-dominated):
+ρb = 14.71 (E/f'b)^−0.480 × r^−0.061      MGP12 → 0.85 (matches Q6.1)
+ρc = 11.39 (E/f'c)^−0.408 × r^−0.074      MGP12 → 0.98 (matches Q6.1),  MGP10 → 0.96
+Table 3.3 ρc seasoned: MGP15 0.99, A17 1.10, F8 1.00, F14 1.05, F17 1.08, F22 1.12</div>
+    <h3>Member capacities (Section 3)</h3>
+    <div class="f">Tension      Nd,t = φ k1 k4 k6 f't At          At = NET (minus holes, D × 1.1); nail plates → no loss
+                     size (F-grades): f't × (150/d)^0.167 when width d &gt; 150 (Q3.1, Q3.4)
+                     bending f'b × (300/d)^0.167 when depth d &gt; 300
+Compression  Nd,c = φ k1 k4 k6 k12 f'c Ac      check both axes, smaller k12 governs
+Bending      Md   = φ k1 k4 k6 k9 k12 f'b Z     Z = bd²/6
+Shear        Vd   = φ k1 k4 k6 f's As           As = 2bd/3
+Bearing      Nd,p = φ k1 k4 k6 k7 f'p Ap        f'p by strength group (SD6 → 10 MPa)
+
+Bending + compression:  (M*/Md)² + N*c/Nd,cy ≤ 1   and   M*/Md + N*c/Nd,cx ≤ 1
+Bending + tension:      M*/Md + N*t/Nd,t ≤ 1        and   M*/Md − (Z/A)(N*t/Md) ≤ 1</div>
+    <h3>Serviceability</h3>
+    <div class="f">δ = 5 (Σ j2 w) L⁴ / (384 E I)      no φ, no k1, unfactored loads, mean E
+j2 per load part: short (≤ 1 day) 1.0; at ≥ 1 year 2.0 (MC ≤ 15%), 2.5 (20%), 3.0 (≥ 25%)
+j3 (tension members): 1.0 seasoned, up to 1.5 at MC ≥ 25%
+Σ j2 w = 2.0 × G + 1.0 × ψs Q        (G + ψs Q)
+Σ j2 w = 2.0 × (G + ψl Q)            (G + ψl Q)
+ψs = 0.7   ψl = 0.4    vibration ψs Q alone → span/250
+Brittle element nearby → use E0.05 ≈ 0.75 Emean (Q5.3)
+Units: kN/m = N/mm, mm, MPa, mm⁴ → δ in mm</div>
+    <h3>Joints (Section 4)</h3>
+    <div class="f">Nails (Type 1)   Nd,j = φ k1 k13 k14 k16 k17 n Qk       Qk Table 4.1(B) seasoned
+   k13 side grain 1.0 / end grain 0.6    k14 single 1.0 / double shear 2.0
+   k16 steel plates 1.2, plywood gussets 1.1, else 1.0   k17 Table 4.3
+Bolts (Type 1)   Nd,j = φ k1 k16 k17 n Qsk
+   parallel → Table 4.9, perpendicular → Table 4.10; (A) system, (B) unseasoned, (C) seasoned
+   k16 steel side plates 1.2, else 1.0   k17 Table 4.12
+Screws (Type 2)  Nd,j = lesser of φ k13 lp n Qk and n Nd,ts   NO k1 (withdrawal)
+   Qk per mm (Table 4.6B seasoned JD4: No.8 56, 10 66, 12 75, 14 85 N/mm)
+Nails (Type 2)   Nd,j = φ k13 lp n Qk   NO k1; k13 end grain 0.25 straight / 0.6 skew
+Nail spacing (Table 4.4): end 20D, edge 5D, along 20D, across 10D
+   prebored 80% D: end 10D, edge 5D, along 10D, across 3D
+Bolt spacing (Cl 4.4.4): ∥ load: 5D along, 4D between rows, 2D edge,
+   end 8D tension unseasoned / 7D tension seasoned / 5D compression
+   ⊥ load: 5D along grain, 4D loaded edge, rows a = 2.5D (b/D = 2) to 5D (b/D ≥ 6)</div>
+  </div>
+</section>
+
+<!-- ============ DRILL ============ -->
+<section class="view" id="v-drill" hidden>
+  <div class="card">
+    <div class="eyebrow">MCQ drill</div>
+    <h2>61 past multiple-choice questions</h2>
+    <p>Every Part A question from 2021–2025, except four that need the original labelling diagrams. No official key was released, so these are worked answers. Answers checked against AS1720.1 where the standard decides them.</p>
+    <div class="qbar">
+      <select id="qPaper" aria-label="Paper"><option value="all">All papers</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select>
+      <select id="qTopic" aria-label="Topic"></select>
+      <button type="button" id="qWrong">Only my misses</button>
+      <button type="button" id="qReset">Clear answers</button>
+      <span class="score" id="qScore"></span>
+    </div>
+  </div>
+  <div id="quiz" style="display:flex;flex-direction:column;gap:14px"></div>
+</section>
+
+<!-- ============ NUMBER DRILLS ============ -->
+<section class="view" id="v-numbers" hidden>
+  <div class="card">
+    <div class="eyebrow">Number drills</div>
+    <h2>Unlimited fresh practice</h2>
+    <p>Each press makes a new problem in the exam's style. Work it on paper with your calculator, then reveal. Five clean load-combination drills in a row means the first 5 marks of every Part C problem are banked.</p>
+  </div>
+  <div class="card gen" id="g-combo"></div>
+  <div class="card gen" id="g-col"></div>
+  <div class="card gen" id="g-beam"></div>
+  <div class="card gen" id="g-defl"></div>
+</section>
+
+<!-- ============ PAPERS ============ -->
+<section class="view" id="v-papers" hidden>
+  <div class="card">
+    <div class="eyebrow">2025 Semester 2 exam</div>
+    <h2>Worked solutions, Parts B and C</h2>
+    <p>No official solutions were released, so these are worked from the tutorial methods and checked by calculation. Try each one first. Part A answers are in the MCQ drill. The bottom of this tab has short model answers to every Part B question from 2021–2024.</p>
+  </div>
+  <div id="papers" style="display:flex;flex-direction:column;gap:12px"></div>
+</section>
+
+</div></main>
+<footer><div class="wrap">Made for one student's CIVL4334 sprint. Check anything that looks off against your tutorial solutions and AS1720.1.</div></footer>
+
+<script>
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const k12f=x=>x<=10?1:x<=20?1.5-0.05*x:200/(x*x);
+
+/* ---------- routing ---------- */
+const views=["plan","learn","factors","drill","numbers","papers"];
+function show(v){if(!views.includes(v))v="plan";views.forEach(x=>{$("#v-"+x).hidden=x!==v});
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v?"true":"false"));}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>{location.hash=b.dataset.v;show(b.dataset.v);window.scrollTo({top:0})}));
+window.addEventListener("hashchange",()=>show(location.hash.slice(1)));
+show(location.hash.slice(1));
+
+/* ---------- plan ---------- */
+const PLAN=[
+ {day:"Night before Day 1",sub:"~45 min",items:[
+  ["t1","Now","Read the Plan tab, then Lessons 1 and 2","Learn what φ, k1, k4, k6 and k12 are. Do 2 load-combination drills."],
+  ["t2","+30 min","Skim the Factor card, then sleep","Just see where everything is. Memory consolidates overnight."]]},
+ {day:"Day 1",sub:"the main day, ~10 h",items:[
+  ["m1","08:00","Lesson 1 (load combos) + Q3.2 (a, b) and Q4.4 (a, b)","Pick the critical combo by N*/k1 every time. Do 5 load-combination drills."],
+  ["m2","10:30","Lessons 3–4 (tension, compression) + Q3.1, Q3.2, Q4.4 in full","Q3.1 is the bridge chord (unseasoned, size factor). Q4.4 has the minor-axis trap."],
+  ["m3","12:30","Lunch, then 3 column drills","Short break. Do the drills on your actual Casio."],
+  ["m4","13:30","Lessons 5 and 7 (beams, combined actions)","Q5.3 Part 2, Q5.6, then Q6.1. Q6.1 is the combined-actions template."],
+  ["m5","15:30","Lesson 6 (deflection) + Q5.3 Part 1, then 2025 Problem 1","Write δ with j2 split by load part. 3 deflection drills."],
+  ["m6","17:00","Dinner","Walk away from the desk."],
+  ["m7","18:00","Lessons 8–9 (nails, screws, bolts) + Q7.1, Q7.2","Find Qk in a table, apply k13–k17, check spacing."],
+  ["m8","19:30","Lesson 10 (bonded-in rods, brittle failure) + 2025 Problem 3","All equations are given in the appendix, so focus on the force couple and which failure mode you want."],
+  ["m9","21:00","Lessons 11–12 (theory) + 2025 and 2024 MCQs","Note every miss. Sleep by 23:00."]]},
+ {day:"Day 2 / exam day",sub:"before the exam",items:[
+  ["e1","Morning","MCQ drill: 2021–2023, then 'Only my misses'","Re-read the theory for whichever topics you missed."],
+  ["e2","+1.5 h","Timed run: 2024 Part C in 70 min","Calculator and your printed materials only. Then check against your notes."],
+  ["e3","+1 h","Part B answers: write 3 bullets for each past question","Compare with the model answers at the bottom of the 2025 solutions tab."],
+  ["e4","+1 h","Tab AS1720.1 (Plan tab list) and print the Factor card","This is what makes open book fast."],
+  ["e5","Last hour","Stop studying","Eat, pack calculator (Casio FX82), standard, tutorials, arrive early."]]}
+];
+function renderPlan(){const done=store.get("civl4334-plan",{});let html="",n=0,c=0;
+ PLAN.forEach(d=>{html+=`<div class="day"><h3>${d.day} <small>${d.sub}</small></h3>`;
+  d.items.forEach(([id,t,b,desc])=>{n++;if(done[id])c++;
+   html+=`<label class="task${done[id]?" done":""}"><input type="checkbox" id="${id}" ${done[id]?"checked":""}><span><span class="t">${t}</span><b>${b}</b><span class="d">${desc}</span></span></label>`});html+="</div>"});
+ $("#plan").innerHTML=html;$("#plan").style.cssText="display:flex;flex-direction:column;gap:18px";
+ const p=Math.round(100*c/n);$("#pct").textContent=p+"%";$("#pbar").style.width=p+"%";
+ $("#plan").querySelectorAll("input").forEach(i=>i.addEventListener("change",()=>{const s=store.get("civl4334-plan",{});s[i.id]=i.checked;store.set("civl4334-plan",s);renderPlan()}));}
+$("#resetPlan").addEventListener("click",()=>{store.set("civl4334-plan",{});renderPlan()});
+renderPlan();
+
+/* ---------- figures ---------- */
+function k12Fig(){const W=560,H=250,x0=52,y0=210,xs=x=>x0+x*11.5,ys=y=>y0-y*180;let pts=[];for(let x=0;x<=40;x+=0.5)pts.push(xs(x).toFixed(1)+","+ys(k12f(x)).toFixed(1));
+ let s=`<svg class="fig" viewBox="0 0 ${W} ${H}" role="img" aria-label="k12 against rho times S">`;
+ [0,0.25,0.5,0.75,1].forEach(v=>{s+=`<line x1="${x0}" x2="${xs(40)}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)" stroke-width="1"/><text x="${x0-8}" y="${ys(v)+4}" font-size="11" text-anchor="end" fill="var(--muted)">${v.toFixed(2)}</text>`});
+ [0,10,20,30,40].forEach(v=>{s+=`<text x="${xs(v)}" y="${y0+18}" font-size="11" text-anchor="middle" fill="var(--muted)">${v}</text>`});
+ s+=`<line x1="${xs(10)}" x2="${xs(10)}" y1="${ys(1)}" y2="${y0}" stroke="var(--muted)" stroke-dasharray="3 3"/><line x1="${xs(20)}" x2="${xs(20)}" y1="${ys(1)}" y2="${y0}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
+ s+=`<polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`;
+ s+=`<text x="${xs(3)}" y="${ys(1)-8}" font-size="11" fill="var(--ink)">k12 = 1</text><text x="${xs(12.5)}" y="${ys(0.9)}" font-size="11" fill="var(--ink)">1.5 − 0.05ρS</text><text x="${xs(25)}" y="${ys(0.42)}" font-size="11" fill="var(--ink)">200/(ρS)²</text>`;
+ const pS=33.33,pk=k12f(pS);s+=`<circle cx="${xs(pS)}" cy="${ys(pk)}" r="4.5" fill="var(--crit)"/><text x="${xs(pS)+8}" y="${ys(pk)-8}" font-size="11" fill="var(--crit)">Q4.4: 33.3 → 0.18</text>`;
+ s+=`<text x="${xs(20)}" y="${H-4}" font-size="11" text-anchor="middle" fill="var(--muted)">ρS (slenderness × material constant)</text>`;
+ return s+"</svg>";}
+function coupleFig(){return `<svg class="fig" viewBox="0 0 560 230" role="img" aria-label="Force couple on the two rod sets">
+ <rect x="140" y="40" width="280" height="150" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.2"/>
+ <line x1="173" y1="40" x2="173" y2="110" stroke="var(--ink)" stroke-width="3"/><line x1="387" y1="40" x2="387" y2="110" stroke="var(--ink)" stroke-width="3"/>
+ <text x="173" y="128" font-size="11" text-anchor="middle" fill="var(--ink)">set 1</text><text x="387" y="128" font-size="11" text-anchor="middle" fill="var(--ink)">set 2</text>
+ <line x1="173" y1="160" x2="387" y2="160" stroke="var(--muted)"/><text x="280" y="176" font-size="11" text-anchor="middle" fill="var(--muted)">z = 470 mm</text>
+ <path d="M173,36 V8" stroke="var(--crit)" stroke-width="2.2" fill="none"/><path d="M167,16 L173,6 L179,16 z" fill="var(--crit)"/>
+ <text x="60" y="18" font-size="12" fill="var(--crit)">10 + 10 = 20 kN</text><text x="60" y="34" font-size="11" fill="var(--muted)">(N*/2 + M*/z)</text>
+ <path d="M387,36 V8" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+ <text x="400" y="18" font-size="12" fill="var(--ink)">10 − 10 = 0 kN</text><text x="400" y="34" font-size="11" fill="var(--muted)">(N*/2 − M*/z)</text>
+ <text x="280" y="215" font-size="11" text-anchor="middle" fill="var(--muted)">Tension side depends on which way M* turns; mark it on your sketch</text></svg>`;}
+
+/* ---------- lessons ---------- */
+
+/* ---------- MCQ bank: [paper, no, topic, stem, options, correct, why, judgement] ---------- */
+const Q=[
+["2025",1,"Moisture","Which is TRUE?",["MC = (m_wet − m_dry)/m_dry × 100 cannot exceed 100%","The equilibrium moisture content is reached when the MC of timber is in equilibrium with its environment","Timber shrinks and swells with moisture changes above the FSP","Seasoned construction timber has MC of 0%"],1,"MC is on dry mass so it can pass 100%; movement only below FSP; seasoned means ≤ 15%."],
+["2025",2,"Moisture","Which is TRUE?",["End grain takes up moisture faster, so dimensional changes are higher parallel to the grain","Hardwoods can take several years to dry depending on cross-section size","Softwoods cannot be kiln dried because they are too soft","Deck board movement can be avoided by restraining them in a tight pattern"],1,"Longitudinal movement is the smallest; softwoods are routinely kiln dried; restraint causes cracks."],
+["2025",3,"Connections","Which is TRUE?",["Self-tapping screws can reinforce notches in beams","They can reinforce beams that bear on columns","They can reinforce openings in beams","All of the above"],3,"Screws reinforce perpendicular to the grain in all three cases."],
+["2025",4,"EWPs & bridges","Which is FALSE?",["SLT is commonly used for bridge decks","CLT is commonly used for bridge decks","Timber–concrete composite can be used for bridge decks","Durable hardwood boards are common on pedestrian bridge decks"],1,"CLT is for walls, floors and roofs, not commonly bridge decks."],
+["2025",5,"Durability","Which is TRUE?",["Timber treatment (H2, H3) should match the hazard class","Service life is independent of species","Both sapwood and heartwood of hardwoods can be treated","CCA or ACQ increase the durability of metal fasteners"],0,"Species matters; hardwood heartwood resists treatment; copper treatments corrode fasteners."],
+["2025",6,"Code scope","Which are NOT covered in AS1720.1-2010?",["Inclined screws in CLT","Brittle failure modes in bolted connections","Glued-in rods in glulam","All of the above"],3,"None of these is in AS1720.1-2010."],
+["2025",7,"Fire","Which is FALSE?",["The zero-strength layer is char plus wood that lost strength due to heat","At constant exposure, char depth increases with time","Charring rate depends on density","Timber does not burn, it chars"],3,"Timber burns: pyrolysis gases ignite. Charring is part of burning."],
+["2025",8,"Durability","Which in-situ measure enhances durability of utility poles?",["Hosing them down to remove mould and fungi","Painting with chemical paints","In-situ vacuum pressure treatment","Solid soluble rods that release preservative"],3,"Diffusible preservative rods inserted in drilled holes."],
+["2025",9,"Grading","Which is FALSE?",["GL grades are used for glulam","F grades are used for softwoods and hardwoods","MGP stands for machine graded pine","A grades indicate the timber was grown in Australia"],3,"A-grades are reliability-tested seasoned hardwood grades."],
+["2025",10,"Fire","Which is NOT a heat transfer mechanism?",["Radiation","Conduction","Convection","Combustion"],3,"Combustion is a chemical reaction."],
+["2024",1,"Moisture","Which is FALSE?",["MC cannot exceed 100%","MC is mass of water divided by oven-dry mass","Timber shrinks and swells below the FSP","Seasoned timber is dried to MC ≤ 15%"],0,"Dry-mass basis: green softwood often exceeds 100%."],
+["2024",2,"Grading","Which is TRUE?",["Big knots in deck boards are fine because they are graded visually","Visual strength and appearance grade are the same","Hardwoods can take several years to season depending on size","Softwoods cannot be kiln dried"],2,"Appearance ≠ strength; softwoods are kiln dried routinely."],
+["2024",3,"Design factors","Which is FALSE?",["k1 accounts for load duration at the strength limit state","Duration of load affects deflections but not strength","j2 accounts for creep of bending, compression and shear members","Creep depends on moisture content"],1,"Duration affects strength too; that is what k1 is."],
+["2024",4,"EWPs & bridges","Which is FALSE?",["SLT is common for bridge decks","SLT prestress loads the timber perpendicular to grain","SLT checks include bending and bearing","SLT decks don't need a continuous waterproof membrane"],3,"SLT decks need a membrane to protect the timber and the stressing rods."],
+["2024",5,"Design factors","Which is FALSE?",["φ for joints is generally higher than for members of the same category","φ depends on fastener type","A Cat 2 joint is generally needed to support a Cat 2 member","Larger bolts have lower φ"],0,"Joints get lower φ than members (brittleness, variability)."],
+["2024",6,"Code scope","Which joints are NOT covered in AS1720.1?",["Nailed moment resisting connections","Inclined bolts","Inclined screws","All of the above"],3,"None is covered."],
+["2024",7,"Design factors","Which is FALSE about φ?",["It reflects reliability and variability of strength","It is used for the ultimate and serviceability limit states","It reflects confidence in the structural model","It depends on the element's role"],1,"φ is for strength only. SLS uses no φ."],
+["2024",8,"Durability","Which helps mitigate termite risk?",["Naturally termite-resistant timber","Chemical treatment","A physical barrier","All of the above"],3,"All three are standard termite defences."],
+["2024",9,"Grading","Which is FALSE?",["Some MGP grades can substitute some F-grades","With several grade stamps you must use the lowest","With several grade stamps you can choose which one to use","Visual grading looks at knots, sloping grain and defects"],1,"Each stamp is valid for its grading system, so you may choose."],
+["2024",10,"Code scope","Which EWP is not covered by AS1720.1?",["Plywood","CLT","LVL","Glulam"],1,"CLT is not in AS1720.1."],
+["2023",1,"Moisture","Which is FALSE?",["MC = mass of water / oven-dry mass","MC can exceed 100%","Timber shrinks and swells above the FSP","Timber shrinks and swells below the FSP"],2,"Above FSP only free water changes, no movement."],
+["2023",2,"Design factors","Which is FALSE?",["A size reduction applies to bending strength of large sawn sections","Size effect is calculated the same way for F-grades, MGP and glulam","There is no reduction of bending strength for larger glulam members","Table H3.1 already includes size effect for MGP and A17"],1,"AS1720.1 Table 7.1 gives a size factor for glulam tension only, so (c) is true. Size effects differ by product (F-grades use a formula, MGP is built into H3.1, glulam bending has none), so (b) is false."],
+["2023",3,"Design factors","Which is FALSE?",["k1 accounts for load duration at the strength limit state","Duration of load affects deflections but not strength","j2 accounts for creep","Creep depends on MC"],1,"Load duration reduces strength: k1."],
+["2023",4,"EWPs & bridges","Which is FALSE?",["CLT is commonly used for bridge decks","CLT is common for wall panels","CLT is common for floor slabs","CLT is often used for roof panels"],0,"Not a common bridge deck product."],
+["2023",5,"Design factors","Which is FALSE?",["φ for joints is generally lower than for members","φ depends on fastener type","A Cat 2 joint supports a Cat 2 member","Larger bolts have higher φ because they are stronger"],3,"Bigger bolts get lower φ: stiff, less ductile, split timber."],
+["2023",6,"Design factors","Which is FALSE about φ?",["It reflects reliability of strength data","It is used for strength, stability and serviceability","It reflects confidence in the model","It reflects the effect of one element failing on the structure"],1,"No φ at serviceability."],
+["2023",7,"Durability","Which does NOT help mitigate termite risk?",["Naturally termite-resistant timber","Chemical barrier","Preservative treatment","Thermally modified wood"],3,"Thermal modification helps against fungi, not termites."],
+["2023",8,"Grading","Which is TRUE?",["Better appearance grade means higher stress grade","Visual grade = appearance grade","With several stamps you must use the lowest","With several stamps you may choose which to use"],3,"Each stamp is valid in its own system."],
+["2023",9,"Code scope","Which joints are NOT covered in AS1720.1?",["Inclined screws","Bolted moment resisting connections","Glued-in rods","All of the above"],3,"None is covered."],
+["2023",10,"Code scope","Which EWP is NOT covered in AS1720.1?",["CLT","LVL","Plywood","All of the above"],0,"LVL and plywood are covered; CLT isn't."],
+["2023",11,"Connections","Besides withdrawal of a screwed Type 2 joint, also check:",["Head pull-through","Tensile capacity of the screw","Spacing to prevent splitting","All of the above"],3,"All three are needed."],
+["2023",13,"Durability","Which is FALSE?",["Fungal decay doesn't occur below 20% MC","Decay rarely occurs in submerged timber","Decay doesn't occur below 0 °C","Fungal decay doesn't occur in hardwoods"],3,"Hardwoods decay too, especially sapwood."],
+["2023",14,"Grading","Which is TRUE?",["Clear wood is stronger than structural timber","Clear wood is free from natural defects","Structural timber contains clear wood and defects","All of the above"],3,"All three are true."],
+["2023",15,"Grading","Which is FALSE?",["Bending strength is also called MoR","Bending strength is a material property like tension and compression","Bending strength usually comes from four-point bending tests","It was introduced to simplify beam calculations"],1,"MoR is a convenience value from tests, not a true material property."],
+["2022",1,"Durability","Which is FALSE?",["MC can exceed the FSP","Wood is orthotropic","Termites only attack timber in contact with soil","Keeping timber dry (MC < 20%) prevents fungal attack"],2,"Subterranean termites build tunnels up from the ground."],
+["2022",2,"Anatomy","Which is TRUE?",["Softwoods transport sap in tracheids","Hardwoods are hard and heavy, softwoods light and soft","Balsa and spotted gum are deciduous","Softwoods have no growth rings"],0,"Tracheids in softwoods; vessels in hardwoods. Hardness is not the definition."],
+["2022",3,"EWPs & bridges","Which is TRUE?",["CLT performs better with stronger, stiffer boards in the outer layers","Strength groups correspond to joint groups (SD4 → JD4)","LVL warps and shrinks more than solid wood","Timber is strong in radial and transverse directions"],0,"Outer layers carry most bending stress."],
+["2022",4,"EWPs & bridges","How is CLT made?",["Boards with grain the same direction in every layer","Thin veneers glued perpendicular","Thin veneers glued parallel","Solid boards laid up cross-wise"],3,"Cross-laminated sawn boards. Veneers = plywood/LVL."],
+["2022",5,"Connections","Which is FALSE?",["AS1720.1 tabulates values from extensive testing","The European Yield Model is analytical","EYM uses fastener yield moment and embedment strength","EYM describes both laterally and axially loaded joints"],3,"EYM is for laterally loaded dowel-type joints."],
+["2022",6,"EWPs & bridges","Which is TRUE about LVL?",["Stronger than sawn timber of the same size","More homogeneous than glulam of the same size","Shrinks less than sawn timber","All of the above"],3,"Dispersed defects and thin dried veneers."],
+["2022",7,"Durability","Which does NOT help mitigate fungal attack?",["Naturally durable timber","Keep timber dry","CCA or ACQ treatment","Water-blast timber to remove mould"],3,"Wetting it helps the fungi."],
+["2022",8,"Moisture","Which is FALSE about drying?",["Thin members dry quickly","Timber can't be air-dried, it must be kiln dried","Narrow boards move less than wide ones","Seasoned timber is more dimensionally stable"],1,"Air drying is common, especially for hardwoods."],
+["2022",9,"Code scope","Which connections are NOT in AS1720.1?",["Long self-tapping screws","Bolted moment resisting connections","Glued-in rods","All of the above"],3,"None is covered."],
+["2022",10,"Code scope","Why take care adopting international rules with AS1720.1?",["The code writers might be offended","AS1720.1 values were derived experimentally and may not suit other empirical rules","International rules are probably wrong","The NCC forbids it"],1,"Mixing empirical systems can break their calibration."],
+["2022",11,"Connections","Besides ductile capacity of a bolted steel-to-timber joint, also check:",["Brittle capacity","Bolt shear","Steel plate shear","All of the above"],3,"Every component and failure mode."],
+["2022",13,"Grading","Which is TRUE about clear wood?",["Free from natural defects","Used to derive certain strength properties","Stronger than structural timber","All of the above"],3,"All three."],
+["2022",14,"Moisture","How is the FSP defined?",["MC = 100%","No free water in lumens, maximum bound water in cell walls","No bound water, maximum free water","Same as EMC"],1,"Definition of FSP."],
+["2022",15,"Durability","Which is TRUE?",["Higher stress grade = better appearance","Hardwood sapwood and heartwood are both durable","Sapwood resists insects and decay less than heartwood of the same species","Softwood sapwood and heartwood can both be treated"],2,"Heartwood holds the natural extractives; softwood heartwood resists treatment."],
+["2021",1,"Moisture","Which is TRUE?",["MC is a percentage of wet weight","Timber shrinks equally in all directions","The FSP can be found as the MC where shrinkage begins during drying","Timber doesn't swell below the FSP"],2,"Movement starts once bound water leaves the walls."],
+["2021",2,"Anatomy","Which is TRUE?",["Softwoods have vessels, hardwoods don't","Hardwoods are hard and heavy","Hardwoods such as oak or spotted gum are deciduous (leafy)","Softwoods have no growth rings"],2,"Hardwoods are broadleaf (angiosperms)."],
+["2021",3,"Moisture","Which is TRUE?",["MC can exceed the FSP","CLT improves with stronger boards in the middle","LVL warps more than solid wood","Timber is strong perpendicular to grain"],0,"Green timber holds free water above FSP."],
+["2021",4,"EWPs & bridges","Which EWP is made of veneers?",["Glulam","LVL","CLT","OSB"],1,"Laminated veneer lumber."],
+["2021",5,"EWPs & bridges","Which EWP lets you place higher-graded boards in critical locations?",["OSB","Plywood","LVL","CLT"],3,"Sawn boards, graded by layer. (Glulam does this too, but isn't listed.)"],
+["2021",6,"EWPs & bridges","Which is TRUE about LVL?",["Stronger than sawn timber","More homogeneous than glulam","Shrinks less than sawn timber","All of the above"],3,"All three."],
+["2021",7,"Durability","Which does NOT mitigate termite risk?",["Naturally durable timber like cypress","Avoid ground contact","Paint all timber","A physical or chemical barrier"],2,"Paint is no barrier to termites."],
+["2021",8,"Anatomy","Which releases stored CO₂ at end of life?",["Respiration and photosynthesis","Decomposition or combustion","Deconstruction and recycling","All of the above"],1,"Recycling keeps carbon stored."],
+["2021",9,"Anatomy","About how much of wood's dry weight is carbon?",["70%","50%","30%","100%"],1,"About half."],
+["2021",10,"Grading","What is NOT checked in visual grading?",["Micro-fibril angle","Knots","Grain angle","Pith"],0,"Microfibril angle is microscopic."],
+["2021",11,"EWPs & bridges","Which is FALSE?",["CLT is used for walls and floors","Glulam is used for beams and columns","CLT is made of cross-laminated veneers","LVL is used for beams and columns"],2,"CLT is cross-laminated sawn boards."],
+["2021",12,"Design factors","Which is FALSE?",["Balsa is a hardwood","Knots are remnants of branches","The k2 factor accounts for creep","LVL and plywood are both laminated veneers"],2,"Creep is j2, a serviceability factor."],
+["2021",15,"Grading","Which is FALSE?",["MGP10 has a minimum MoR of 10 MPa","j2 accounts for creep in the SLS for compression and bending","φ differs for members and joints","MGP10 has a minimum E threshold of 10 GPa"],0,"The MGP number refers to E (GPa). MGP10 f'b is 17 MPa."]
+];
+const topics=["All topics",...[...new Set(Q.map(q=>q[2]))].sort()];
+$("#qTopic").innerHTML=topics.map(t=>`<option>${t}</option>`).join("");
+let qState=store.get("civl4334-quiz",{}),onlyWrong=false;
+function renderQuiz(){const paper=$("#qPaper").value,topic=$("#qTopic").value;
+ let list=Q.filter(q=>(paper==="all"||q[0]===paper)&&(topic==="All topics"||q[2]===topic));
+ if(onlyWrong)list=list.filter(q=>{const s=qState[q[0]+"-"+q[1]];return s!==undefined&&s!==q[5]});
+ let right=0,done=0;Q.forEach(q=>{const s=qState[q[0]+"-"+q[1]];if(s!==undefined){done++;if(s===q[5])right++}});
+ $("#qScore").textContent=`${right} / ${done} correct · ${Q.length-done} unanswered`;
+ $("#qWrong").classList.toggle("primary",onlyWrong);$("#qWrong").setAttribute("aria-pressed",onlyWrong);
+ if(!list.length){$("#quiz").innerHTML=`<div class="card"><p>${onlyWrong?"No misses here yet. Answer some questions first, or switch the filter.":"No questions match this filter."}</p></div>`;return}
+ $("#quiz").innerHTML=list.map(q=>{const id=q[0]+"-"+q[1],s=qState[id],ans=s!==undefined;
+  const opts=q[4].map((o,i)=>{let c="opt";if(ans){if(i===q[5])c+=" right";else if(i===s)c+=" wrong"}
+   return `<button type="button" class="${c}" data-q="${id}" data-i="${i}" ${ans?"disabled":""}><span class="k">${"abcd"[i]}</span><span>${o}</span></button>`}).join("");
+  return `<div class="card q"><div class="qh"><span class="qn">${q[0]} exam · Q${q[1]}</span><span class="pill">${q[2]}</span>${q[7]?'<span class="pill">judgement</span>':""}${ans?(s===q[5]?'<span class="pill ok">correct</span>':'<span class="pill crit">missed</span>'):""}</div><p><b>${q[3]}</b></p><div class="opts">${opts}</div>${ans?`<div class="why">${q[6]}</div>`:""}</div>`}).join("");
+ $("#quiz").querySelectorAll(".opt:not([disabled])").forEach(b=>b.addEventListener("click",()=>{qState[b.dataset.q]=+b.dataset.i;store.set("civl4334-quiz",qState);
+  const y=window.scrollY;renderQuiz();window.scrollTo({top:y})}));}
+$("#qPaper").addEventListener("change",renderQuiz);$("#qTopic").addEventListener("change",renderQuiz);
+$("#qWrong").addEventListener("click",()=>{onlyWrong=!onlyWrong;renderQuiz()});
+$("#qReset").addEventListener("click",()=>{qState={};store.set("civl4334-quiz",qState);renderQuiz()});
+renderQuiz();
+
+/* ---------- number drills ---------- */
+const R=(a,b,st=1)=>a+st*Math.floor(Math.random()*((b-a)/st+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const f2=x=>x.toFixed(2),f3=x=>x.toFixed(3);
+function gen(el,title,sub,make){const box=$(el);
+ function draw(){const cur=make();box.innerHTML=`<div class="eyebrow">${sub}</div><h3>${title}</h3><p>${cur.q}</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn primary" type="button" data-a="new">New problem</button><button class="btn" type="button" data-a="show">Reveal answer</button></div><div class="ans" hidden>${cur.a}</div>`;
+  box.querySelector('[data-a="new"]').onclick=draw;box.querySelector('[data-a="show"]').onclick=()=>{box.querySelector(".ans").hidden=false}}
+ draw();}
+const GRADES={MGP10:{fb:17,fc:18,E:10000},MGP12:{fb:28,fc:24,E:12700}};
+const rhoC=(E,fc,r=0.25)=>11.39*Math.pow(E/fc,-0.408)*Math.pow(r,-0.074);
+
+gen("#g-combo","Critical load combination","Drill 1 · first 5 marks of Part C",()=>{
+ const G=R(5,80)/(Math.random()<0.5?10:1),Q=R(5,120)/(Math.random()<0.5?10:1),qt=pick([["office floor live load, 5 months",0.8],["crowd load, 5 days",0.94]]);
+ const c=[["1.35G",1.35*G,0.57],["1.2G + 1.5(0.4)Q",1.2*G+0.6*Q,0.57],["1.2G + 1.5Q",1.2*G+1.5*Q,qt[1]]];let best=c[0];c.forEach(x=>{if(x[1]/x[2]>best[1]/best[2])best=x});
+ return{q:`A member carries G = ${G} kN (permanent) and Q = ${Q} kN (${qt[0]}). ψl = 0.4. Find the critical strength combination, its N* and its k1.`,
+ a:c.map(x=>`${x[0].padEnd(18)} N* = ${f2(x[1]).padStart(7)}  k1 = ${x[2].toFixed(2)}  N*/k1 = ${f2(x[1]/x[2])}`).join("\n")+`\n\nCritical: ${best[0]} → N* = ${f2(best[1])} kN with k1 = ${best[2]}`}});
+
+gen("#g-col","Stud / column in compression","Drill 2 · 2025 Problem 2, Q4.4",()=>{
+ const g=pick(["MGP10","MGP12"]),p=GRADES[g],b=pick([35,45]),d=pick([70,90,140]),L=R(24,36)/10,nog=Math.random()<0.6,cat=pick([1,2]);
+ const phi=cat===1?0.9:0.7,N=R(20,90)/10,rho=rhoC(p.E,p.fc);
+ const S3=0.9*L*1000/d,S4=(nog?L*500:0.9*L*1000)/b,k3=k12f(rho*S3),k4=k12f(rho*S4),k=Math.min(k3,k4),cap=phi*0.8*k*p.fc*b*d/1000;
+ return{q:`Seasoned ${g} stud ${d} × ${b} mm, ${L.toFixed(1)} m tall, Category ${cat}, Brisbane. g13 = 0.9 for the major axis. Minor axis ${nog?"restrained by a noggin at mid-height":"unrestrained (g13 = 0.9)"}. Critical N* = ${N.toFixed(1)} kN with k1 = 0.8, r = 0.25. Check it.`,
+ a:`φ = ${phi} (Cat ${cat}, ${g})   k1 = 0.8   k4 = k6 = 1
+f'c = ${p.fc} MPa, E = ${p.E} MPa
+ρc = 11.39 (${p.E}/${p.fc})^−0.408 (0.25)^−0.074 = ${f3(rho)}
+Major: S3 = 0.9 × ${L*1000}/${d} = ${f2(S3)}  ρS = ${f2(rho*S3)}  k12 = ${f3(k3)}
+Minor: S4 = ${nog?L*500:(0.9*L*1000).toFixed(0)}/${b} = ${f2(S4)}  ρS = ${f2(rho*S4)}  k12 = ${f3(k4)}
+Use k12 = ${f3(k)}
+Nd,c = ${phi} × 0.8 × ${f3(k)} × ${p.fc} × ${b*d} = ${f2(cap)} kN
+${cap>=N?"PASS":"FAIL"} (${(N/cap*100).toFixed(0)}% utilised)`}});
+
+gen("#g-beam","Floor joist in bending","Drill 3 · Q5.6",()=>{
+ const g=pick(["MGP10","MGP12"]),p=GRADES[g],b=pick([35,45]),d=pick([140,190,240]),L=R(25,45)/10,s=pick([0.45,0.6]),G=R(3,8)/10,Q=pick([1.5,2,3]);
+ const w=1.2*G*s+1.5*Q*s,k9=Math.max(1,1+0.2*(1-2*s/L)),Z=b*d*d/6,Md=0.9*0.8*k9*p.fb*Z/1e6,M=w*L*L/8;
+ return{q:`House floor joists, seasoned ${g} ${d} × ${b} at ${s*1000} mm centres, span ${L.toFixed(1)} m, Category 1, flooring nailed to the top edge. G = ${G} kPa, Q = ${Q} kPa (5 months). Use 1.2G + 1.5Q with k1 = 0.8 and k9 from g31 = 1.0, g32 = 1.2. Check bending.`,
+ a:`w* = (1.2 × ${G} + 1.5 × ${Q}) × ${s} = ${f3(w)} kN/m
+M* = ${f3(w)} × ${L.toFixed(1)}² / 8 = ${f3(M)} kNm
+k9 = 1.0 + 0.2 (1 − 2 × ${s}/${L.toFixed(1)}) = ${f3(k9)}
+k12 = 1 (compression edge continuously restrained)
+Z = ${b} × ${d}² / 6 = ${Z.toLocaleString("en-AU")} mm³
+Md = 0.9 × 0.8 × ${f3(k9)} × ${p.fb} × Z = ${f3(Md)} kNm
+${Md>=M?"PASS":"FAIL"} (${(M/Md*100).toFixed(0)}% utilised)`}});
+
+gen("#g-defl","Beam deflection with creep","Drill 4 · 2025 Problem 1, Q5.3",()=>{
+ const L=R(30,70)/10,G=R(20,90)/10,Q=R(30,100)/10,b=pick([65,85]),d=pick([260,330,395,460]),E=15500,lim=pick([12,15,20]);
+ const I=b*d**3/12,c=x=>5*x*(L*1000)**4/(384*E*I),w1=2*G+0.7*Q,w2=2*(G+0.4*Q),d1=c(w1),d2=c(w2);
+ return{q:`Seasoned glulam (E = 15,500 MPa) ${b} × ${d} mm, simply supported over ${L.toFixed(1)} m. G = ${G.toFixed(1)} kN/m, Q = ${Q.toFixed(1)} kN/m. Clearance limit ${lim} mm under both G + ψsQ and G + ψlQ. ψs = 0.7, ψl = 0.4, j2 = 2 long-term and 1 short-term.`,
+ a:`I = ${b} × ${d}³/12 = ${f2(I/1e6)} × 10⁶ mm⁴
+G + ψsQ: Σ j2 w = 2 × ${G.toFixed(1)} + 1 × 0.7 × ${Q.toFixed(1)} = ${f2(w1)} kN/m → δ = ${f2(d1)} mm ${d1<=lim?"≤":"&gt;"} ${lim} ${d1<=lim?"PASS":"FAIL"}
+G + ψlQ: Σ j2 w = 2 × (${G.toFixed(1)} + 0.4 × ${Q.toFixed(1)}) = ${f2(w2)} kN/m → δ = ${f2(d2)} mm ${d2<=lim?"≤":"&gt;"} ${lim} ${d2<=lim?"PASS":"FAIL"}
+δ = 5 w L⁴ / (384 E I), w in N/mm, L in mm`}});
+
+/* ---------- 2025 solutions ---------- */
+const PAPERS=[
+{t:"Problem 1 · Glulam bearer, Brisbane office (15 marks)",h:`
+<p>L = 4000 mm, b = 65 mm, Hyne Beam 15: E = 15,500 MPa (mean). G = 7.0, QS = 10.0 (5 days), QL = 4.0 (50+ yr) kN/m.</p>
+<h3>(1) Vibration check, 5 marks</h3>
+<div class="f">Load = ψs QS = 0.7 × 10 = 7.0 kN/m, short-term → j2 = 1.0
+Limit = 4000/250 = 16 mm
+I_req = 5 × 1.0 × 7.0 × 4000⁴ / (384 × 15,500 × 16) = 94.1 × 10⁶ mm⁴
+65 × 230: I = 65.9 × 10⁶  too small
+65 × 260: I = 95.2 × 10⁶ ≥ 94.1 × 10⁶  → USE 65 × 260</div>
+<h3>(2a) Deflection check, 65 × 460, 8 marks</h3>
+<div class="f">I = 65 × 460³/12 = 527.2 × 10⁶ mm⁴      limit = 15 mm clearance
+Every 1 kN/m gives 5 × 4000⁴/(384 × 15,500 × 527.2×10⁶) = 0.408 mm
+
+G + ψs QS: Σ j2 w = 2.0 × 7.0 + 1.0 × (0.7 × 10) = 21.0 kN/m → δ = 8.6 mm ≤ 15 PASS
+G + ψl QL: Σ j2 w = 2.0 × 7.0 + 2.0 × (0.4 × 4)  = 17.2 kN/m → δ = 7.0 mm ≤ 15 PASS</div>
+<p class="cap">A 5-day load could take j2 slightly above 1.0 by interpolation; it still passes comfortably. Say so in one line.</p>
+<h3>(2b) Two fixes if it failed, 2 marks</h3>
+<ul><li>Deeper or wider section (85 or 130 mm), or a stiffer product (LVL, steel flitch).</li>
+<li>Pre-camber the bearer, add a mid-support, or increase the clearance with a sliding head detail so the bearer can't load the glass.</li></ul>`},
+{t:"Problem 2 · MGP10 stud wall, Adelaide office (15 marks)",h:`
+<h3>(a) Critical combination, 5 marks</h3>
+<div class="scroll"><table class="t">
+<tr><th class="l">Combination</th><th>N* (kN)</th><th>k1</th><th>N*/k1</th></tr>
+<tr><td class="l">1.35G</td><td>0.81</td><td>0.57</td><td>1.42</td></tr>
+<tr><td class="l">1.2G + 1.5ψlQ</td><td>1.98</td><td>0.57</td><td>3.47</td></tr>
+<tr class="cp"><td class="l">1.2G + 1.5Q</td><td>3.87</td><td>0.80</td><td>4.84</td></tr>
+</table></div>
+<p>Critical: N* = 3.87 kN with k1 = 0.8.</p>
+<h3>(b) Compression check, 10 marks</h3>
+<div class="f">90 × 35 MGP10: f'c = 18 MPa, E = 10,000 MPa (H3.1)
+Primary member in a non-house → Cat 2 → φ = 0.70.  k4 = 1 (seasoned), k6 = 1 (Adelaide)
+ρc = 11.39 × (10,000/18)^−0.408 × 0.25^−0.074 = 0.96
+
+Major: S3 = g13 L/d = 0.9 × 2700/90 = 27.0  → ρS = 25.9 → k12 = 200/25.9² = 0.30
+Minor: S4 = Lay/b  = 1350/35      = 38.6   → ρS = 36.9 → k12 = 200/36.9² = 0.147 ← governs
+
+Nd,c = 0.70 × 0.8 × 1 × 1 × 0.147 × 18 × (90 × 35) = 4.65 kN ≥ 3.87 kN  PASS (83%)</div>
+<p class="cap">This uses Table 3.3's ρc (r = 0.25), which is conservative. With the combination's actual r = 0.814 (the Q4.4 tutorial method), ρc = 0.878, k12 = 0.175 and Nd,c = 5.54 kN. Both pass; Learn guide 4 shows the full working.</p>
+<p class="cap">If you argue the wall lining restrains the minor axis, the major axis governs: k12 = 0.30, Nd,c = 9.5 kN. State whichever assumption you use.</p>`},
+{t:"Problem 3 · Bonded-in rods, LVL knee joint (40 marks)",h:`
+<p>From Section A-A: 600 × 250 section; two rod sets <b>z = 470 mm</b> apart; each set is 2 rods, 125 mm apart across the 250 depth, so e = 62.5 mm. Brisbane → k6 = 1; seasoned → k4 = 1; wind 5 s → k1 = 1.00 (timber), 1.14 (joint). LVL primary member → φ = 0.90; rods D ≤ 16, Cat 2 → φ = 0.80.</p>
+<h3>(1) Axial loads, 5 marks</h3>
+<div class="figbox">${coupleFig()}</div>
+<div class="f">Couple force = M*/z = 4.7/0.470 = 10 kN
+Direct tension per set = 20/2 = 10 kN
+Tension side:  Nt* = 10 + 10 = 20 kN
+Other side:    10 − 10 = 0 → Nc* = 0 kN</div>
+<h3>(2a) Minimum rod diameter, 5 marks</h3>
+<div class="f">As ≥ 20,000 / (0.8 × 2 × 240) = 52.1 mm²  → D ≥ 8.1 mm
+Pull-out formula is valid only for 12 ≤ D ≤ 24 → use D = 12
+Nd,steel = 0.8 × 2 × 113.1 × 240 = 43.4 kN</div>
+<h3>(2b) Wood net tension, 5 marks</h3>
+<div class="f">D0 = 1.25 × 12 = 15 mm
+Aw (assumed: strip around one set, 2 × 65 = 130 wide × 250 deep, minus holes)
+   = 130 × 250 − 2 × π × 7.5² = 32,150 mm²
+Nd,wood = 0.90 × 1.0 × 1 × 1 × 32,150 × 30 = 868 kN</div>
+<h3>(2c) Pull-out, L = 10D = 120 mm, 5 marks</h3>
+<div class="f">Qk = 6.73 × 10^0.86 × 0.6^1.62 × 1.25^0.5 × (62.5/12)^0.5 = 54.4 kN
+kg = 1.0 (2 bars)
+Nd,pullout = 0.8 × 1.14 × 1 × 1 × 2 × 1.0 × 54.4 = 99.2 kN ≥ 20  PASS</div>
+<h3>(2d) Failure mode, 5 marks</h3>
+<p>Nd,j = min(43.4, 868, 99.2) = 43.4 kN: <b>steel yield governs</b>. That is desirable: yielding steel is ductile, gives warning and redistributes load, while wood tension and pull-out are brittle and sudden. The joint is also safe: 20 ≤ 43.4.</p>
+<h3>(3a) Shear, V* = 6 kN, 10 marks</h3>
+<div class="f">All n = 4 rods
+Vd,steel = 0.8 × 4 × 113.1 × 240/√3 = 50.1 kN
+Qkp = 8,830 N  (AS1720.1 Table 4.10(C), JD4, M12, beff = L = 120 mm)
+Vd,p = 0.8 × 1.14 × 1 × 1 × 1.2 × 4 × 8.83 = 38.7 kN
+Vd,j = min(50.1, 38.7) = 38.7 kN ≥ 6  PASS</div>
+<h3>(3b) Combined, linear interaction, 5 marks</h3>
+<div class="f">Nt*/Nd,j + V*/Vd,j = 20/43.4 + 6/Vd,j ≤ 1   → holds when Vd,j ≥ 11.1 kN
+With Vd,j = 38.7:  0.46 + 0.16 = 0.62  PASS</div>`},
+{t:"Part B · Short answers (30 marks)",h:`
+<p><b>Q1 Boards vs small clears.</b> Small clears are defect-free; boards contain natural defects that concentrate stress and reduce the effective section, and bigger pieces are more likely to hold a critical flaw (size effect). Three characteristics: knots, slope of grain, checks/splits. Also wane, pith and juvenile wood.</p>
+<p><b>Q2 Type 2 screwed joint.</b> Nd,j = φ k13 lp n Qk (no k1 for withdrawal), capped at n Nd,ts. Penetration length lp (capacity proportional to it); timber density via joint group, which sets Qk (Table 4.6); screw diameter/gauge, also in Qk; grain direction via k13 (1.0 side, 0.6 end grain); number of screws n.</p>
+<p><b>Q3 Osaka roof beam.</b> Beam end exposed beyond the roof edge; rain soaks the unprotected end grain; dark staining shows long wetting and likely decay; checks from wet–dry cycles let water in deeper; water runs onto the joint below. Fixes: cap or flash the end grain; stop the beam inside the roof line or extend the overhang; use a durable or H3-treated species; chamfer tops so water sheds.</p>
+<p><b>Q4 Lower φ for bolts &gt; M16.</b> Large bolts are stiff and don't bend, so the joint can't yield ductilely; failure goes into embedment and splitting, which is brittle. They also wedge the grain apart, share load among fewer fasteners, and their test data vary more. A lower φ gives more reliability margin for that behaviour.</p>
+<p><b>Q5 Staggered bolts.</b> Timber splits along the grain. Bolts in one line share one plane of weakness, so a single split or row-shear plug runs through all of them. Staggering puts them on different grain lines, so a crack passes only one bolt and the load spreads over more wood. Result: higher splitting and row-shear capacity, more ductile behaviour.</p>
+<p><b>Q6 Three ways to reduce brittle failure.</b> Larger end/edge distances and spacing; more slender fasteners that yield first; self-tapping screw reinforcement perpendicular to grain; staggering; slotted holes or seasoned timber so shrinkage isn't restrained.</p>`},
+{t:"Past Part B questions 2021–2024 · model answers",h:`
+<div class="scroll"><table class="t">
+<tr><th>Year</th><th class="l">Question</th><th class="l">Answer in bullets</th></tr>
+<tr><td>2024</td><td class="l">Three defects visual graders look for (AS2082)</td><td class="l">Knots, slope of grain, pith/heart, wane, checks and splits, gum veins, decay, insect damage</td></tr>
+<tr><td>2024</td><td class="l">Two parameters for screw withdrawal, how AS1720.1 reflects them</td><td class="l">Same as 2025 Q2: lp, joint group (Qk), diameter, k13 grain, n; no k1 for withdrawal</td></tr>
+<tr><td>2024</td><td class="l">Which glulam base detail is more durable</td><td class="l">Pick the one lifted off the slab on a steel shoe, end grain covered, water can drain; the other traps water at end grain against concrete</td></tr>
+<tr><td>2024</td><td class="l">Why LVL is more reliable than sawn timber</td><td class="l">Defects dispersed over many thin veneers, controlled drying, lower variability → AS1720.1 gives LVL a higher φ</td></tr>
+<tr><td>2024</td><td class="l">Better column base with bracing</td><td class="l">The one where brace and column forces meet at one point (no eccentricity, no extra bending), with fasteners clear of end grain and edges</td></tr>
+<tr><td>2024</td><td class="l">Why spacing along the grain exceeds spacing across it</td><td class="l">Splits run along the grain; a fastener loaded along the grain shears out a plug ahead of it, so it needs more length to resist row shear and splitting</td></tr>
+<tr><td>2023</td><td class="l">Which deck screw pattern is more durable</td><td class="l">Fewer face screws / hidden fixings: fewer holes for water, less end-grain exposure, less splitting and rust staining</td></tr>
+<tr><td>2023</td><td class="l">Why cut before pressure treatment (AS5100.9)</td><td class="l">Treatment only penetrates the outer zone; cutting after exposes untreated core to decay and termites</td></tr>
+<tr><td>2023</td><td class="l">What a grade stamp shows and why</td><td class="l">Stress grade, species or group, grading standard, producer/mill, treatment (H-class), seasoned or not; traceability and so the designer can pick design values</td></tr>
+<tr><td>2023</td><td class="l">How AS1720.1 handles creep</td><td class="l">j2 multiplies deflection per load part by duration (1 short, 2 long seasoned, up to 3 unseasoned); also j3 for tension/compression members</td></tr>
+<tr><td>2023</td><td class="l">EC5 vs AS1720.1 design strength</td><td class="l">Same: modification factors for duration/moisture (kmod vs k1, k4), characteristic values, stability factors. Different: EC5 divides by γM by material (≥ 1), AS1720.1 multiplies by φ (≤ 1) that also depends on category</td></tr>
+<tr><td>2022</td><td class="l">Crack in a column base joint in Cairns</td><td class="l">Timber dried after installation (tropical, k6 location), shrinkage restrained by thick steel plate and bolts in one line → tension perpendicular to grain → split along the bolt row</td></tr>
+<tr><td>2022</td><td class="l">More moment capacity without more bolts</td><td class="l">Increase the bolt circle radius r (needs bigger section, edge distances); use larger bolts (lower φ, splitting); add plates/shear planes (more slots, thicker member)</td></tr>
+<tr><td>2022</td><td class="l">Which column base is more durable</td><td class="l">B: lifted ~10 cm off the slab, no tap or wet services attached, water drains; A sits in contact with concrete and gets wetted by the tap</td></tr>
+<tr><td>2022</td><td class="l">Termite control without chemicals</td><td class="l">Physical barriers (stainless mesh, graded stone, ant caps); raised floors with clear inspection zones; naturally resistant species</td></tr>
+<tr><td>2022</td><td class="l">AS1720.1 vs EC5 screw withdrawal</td><td class="l">Same: capacity ∝ penetration length. Different: EC5 has continuous angle term (α), AS1720.1 only side/end grain (k13); EC5 uses fax,k × d, AS1720.1 tabulated Qk by joint group</td></tr>
+<tr><td>2021</td><td class="l">Crack in green beam at bolted joint, two fixes</td><td class="l">Use seasoned timber; slotted holes or fewer, smaller bolts so shrinkage isn't restrained; keep bolts in one row close together across the grain</td></tr>
+<tr><td>2021</td><td class="l">Sketch two brittle modes, three preventions</td><td class="l">Sketch row shear and splitting (or block shear). Prevent: bigger spacing/end distance, slender fasteners, reinforcement screws, stagger</td></tr>
+<tr><td>2021</td><td class="l">Define MC, can it exceed 100%?</td><td class="l">(m_wet − m_dry)/m_dry × 100; yes, because it's on dry mass and green wood can hold more water than its own dry weight</td></tr>
+<tr><td>2021</td><td class="l">Two ways to limit decay fungi</td><td class="l">Keep MC &lt; 20% by detailing (removes moisture); preservative treatment or durable heartwood (removes food); submerging removes oxygen</td></tr>
+<tr><td>2021</td><td class="l">CLT self-extinction</td><td class="l">No char fall-off/delamination (heat-resistant adhesive); limited exposed timber area so radiant feedback stops once furniture fuel burns out</td></tr>
+</table></div>`}
+];
+$("#papers").innerHTML=PAPERS.map(p=>`<details class="mod"><summary><span class="ttl"><h3>${p.t}</h3></span></summary><div class="body">${p.h}</div></details>`).join("");
+</script>
+
+</body></html>
